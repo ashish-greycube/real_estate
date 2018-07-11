@@ -2,7 +2,23 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Property', {
-	refresh: function(frm) {
+	contact_person_name: function(frm) {
+		frappe.call({
+			method: "real_estate.real_estate.doctype.property.property.get_contact_detail",
+			args:{
+				"customer_name": frm.doc.contact_person_name
+			},
+			callback: function(r) {
+				console.log(r)
+				if (r.message) {
+					frm.set_value('contact_email',r.message[0])
+					frm.set_value('contact_phone',r.message[1])
+				}
+				else {
+					
+				}
+			}
+		});
 
 	}
 });

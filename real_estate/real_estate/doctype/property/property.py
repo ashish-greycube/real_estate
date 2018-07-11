@@ -8,3 +8,10 @@ from frappe.model.document import Document
 
 class Property(Document):
 	pass
+
+@frappe.whitelist()
+def get_contact_detail(customer_name):
+	return frappe.db.sql("""select email_id,phone from tabContact 
+		where first_name= (
+				select link_name from `tabDynamic Link` where link_doctype='Customer' and link_name=%s
+			)""",customer_name)[0]

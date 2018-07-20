@@ -1,5 +1,13 @@
 // Copyright (c) 2018, GreyCube Technologies and contributors
 // For license information, please see license.txt
+cur_frm.fields_dict['customer'].get_query = function(doc) {
+	console.log("1")
+	return {
+		filters: {
+			'customer_type': 'Owner'
+		}
+	}
+}
 
 frappe.ui.form.on('Property', {
 	contact_person_name: function(frm) {

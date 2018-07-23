@@ -6,3 +6,14 @@ frappe.ui.form.on('Property Transaction', {
 
 	}
 });
+frappe.ui.form.on('Property Transaction', {
+	setup: function(frm) {
+		frm.fields_dict['client'].get_query = function(doc){
+	return {
+		query: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_client"
+	};
+
+		}
+	}
+
+})

@@ -14,10 +14,10 @@ def get_contact_detail(customer_name):
 	return frappe.db.sql("""select email_id,phone from tabContact 
 		where first_name= (
 				select link_name from `tabDynamic Link` where link_doctype='Customer' and link_name=%s
-			)""",customer_name)[0]
+			)""",customer_name)
 
 
-def get_customer(doctype, txt, searchfield, start, page_len, filters):
+def get_owner(doctype, txt, searchfield, start, page_len, filters):
 	return frappe.db.sql("""select name from `tabCustomer` where docstatus=0 and customer_type ='Owner' order by name""".format(**{
 			'key': searchfield,
 		}), {

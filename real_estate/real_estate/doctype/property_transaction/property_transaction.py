@@ -18,3 +18,6 @@ def get_client(doctype, txt, searchfield, start, page_len, filters):
 			'start': start,
 			'page_len': page_len
 		})
+@frappe.whitelist()
+def get_property_detail(property_name):
+	return frappe.db.sql("""select for_customer,property_name,floor,address,property_type from `tabProperty` where docstatus=0 and property_name =%s""" ,property_name, as_dict=1)

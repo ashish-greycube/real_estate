@@ -45,7 +45,7 @@ frappe.ui.form.on('Property Transaction', {
                                 ).join('')}
                             </tbody>
                         </table>`
-                    $(cur_frm.fields_dict.property_data.wrapper).html(html);
+                    $(cur_frm.fields_dict.property_details.wrapper).html(html);
                 }
             }
         });

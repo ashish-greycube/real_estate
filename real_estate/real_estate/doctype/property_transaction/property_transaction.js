@@ -23,7 +23,7 @@ frappe.ui.form.on('Property Transaction', {
     property: function (doc, dt, dn) {
 
         frappe.call({
-            method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_property",
+            method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_property_detail",
             args: {
                 suppname: cur_frm.doc.property,
             },

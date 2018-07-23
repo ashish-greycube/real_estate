@@ -2823,7 +2823,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-07-23 04:34:20.194697", 
+ "modified": "2018-07-23 08:16:02.549936", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "Property", 
@@ -2877,6 +2877,7 @@
  "show_name_in_global_search": 0, 
  "sort_field": "modified", 
  "sort_order": "DESC", 
+ "title_field": "property_name", 
  "track_changes": 1, 
  "track_seen": 0
 }

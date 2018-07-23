@@ -32,17 +32,18 @@ frappe.ui.form.on('Property Transaction', {
                     const html = `There is no property detail for `+cur_frm.doc.property
                     $(cur_frm.fields_dict.property_details.wrapper).html(html);
                 }
-                const property_data = r.message;
+                const property_data = r.message[0];
                 console.log(r.message)
                 console.log(property_data)
                 if (property_data) {
                     const html = `
                         <table class="table table-bordered">
-                            <thead><tr><th>${__("#")}</th><th>${__("Type")}</th><th>${__("Owner")}</th><th>${__("Property")}</th><th>${__("Floor")}</th><th>${__("Address")}</th><th>${__("Type")}</th></tr></thead>
                             <tbody>
-                                ${property_data.map((c,i) => `<tr><td>${i+1}</td><td>${c.for_customer}</td><td>${c.property_name}</td>
-                                    <td>${c.floor}</td><td>${c.address}</td><td>${c.property_type}</td></tr>`
-                                ).join('')}
+							   <tr><td>${__("Owner: ")}${property_data.for_customer}</td></tr>
+							   <tr><td>${__("Property: ")}${property_data.property_name}</td></tr>
+							   <tr><td>${__("Floor: ")}${property_data.floor}</td></tr>
+							   <tr><td>${__("Address: ")}${property_data.address}</td></tr>
+							   <tr><td>${__("Type: ")}${property_data.property_type}</td></tr>
                             </tbody>
                         </table>`
                     $(cur_frm.fields_dict.property_details.wrapper).html(html);

@@ -5,6 +5,7 @@ frappe.ui.form.on('Property', {
 	customer: function (frm) {
 		frm.set_value('contact_email', "")
 		frm.set_value('contact_phone', "")
+		if (frm.doc.customer!=undefined){
 		frappe.call({
 			method: "real_estate.real_estate.doctype.property.property.get_contact_detail",
 			args: {
@@ -18,6 +19,7 @@ frappe.ui.form.on('Property', {
 				}
 			}
 		});
+	}
 
 	},
 	setup: function (frm) {

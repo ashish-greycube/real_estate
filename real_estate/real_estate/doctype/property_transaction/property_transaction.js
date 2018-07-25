@@ -11,7 +11,7 @@ cur_frm.fields_dict['property'].get_query = function(doc,cdt,cdn) {
 				'docstatus': 0
 			}
 	}}
-	else if (transaction_type == 'Sell') {
+	else if (transaction_type == 'Sale') {
 		return{
 			filters:{
 				property_status: ["in", ["For Sale", "For Rent And Sale"]],
@@ -19,9 +19,7 @@ cur_frm.fields_dict['property'].get_query = function(doc,cdt,cdn) {
 			}
 	}
 	}
-	else if (transaction_type == 'Visit') {
-
-		
+	else if (transaction_type == 'Visit') {		
 			return{
 			filters:{
 				'docstatus': 0
@@ -93,7 +91,7 @@ frappe.ui.form.on('Property Transaction', {
 			}
 		});
 	}
-		// frm.doc.sale_price=''
+	
 
 	},
 	onload:function(frm){

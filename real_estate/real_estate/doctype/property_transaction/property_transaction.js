@@ -94,6 +94,16 @@ frappe.ui.form.on('Property Transaction', {
 	
 
 	},
+	rent_price: function (frm) {
+		frm.set_value('commission_from_owner',frm.doc.rent_price)
+		frm.set_value('commission_from_client',frm.doc.rent_price)
+	},
+	actual_sale_price: function (frm) {
+		if (frm.doc.actual_sale_price>0){
+		frm.set_value('commission_from_owner',frm.doc.actual_sale_price*0.01)
+		frm.set_value('commission_from_client',frm.doc.actual_sale_price*0.01)
+		}
+	},
 	onload:function(frm){
 		if (frm.doc.property==null){
 		$(cur_frm.fields_dict.property_details.wrapper).html('');}

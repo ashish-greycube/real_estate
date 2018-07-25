@@ -9,7 +9,7 @@
  "custom": 0, 
  "docstatus": 0, 
  "doctype": "DocType", 
- "document_type": "", 
+ "document_type": "Document", 
  "editable_grid": 1, 
  "engine": "InnoDB", 
  "fields": [
@@ -2852,7 +2852,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-07-25 05:46:20.483874", 
+ "modified": "2018-07-25 07:51:42.460464", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "Property", 

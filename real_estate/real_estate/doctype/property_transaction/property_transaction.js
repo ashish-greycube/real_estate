@@ -1,6 +1,37 @@
 // Copyright (c) 2018, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
+cur_frm.fields_dict['property'].get_query = function(doc,cdt,cdn) {
+	console.log(doc.transaction_type)
+	transaction_type=doc.transaction_type
+	if (transaction_type == 'Rent') {
+		return{
+			filters:{
+				property_status: ["in", ["For Rent", "For Rent And Sale"]],
+				'docstatus': 0
+			}
+	}}
+	else if (transaction_type == 'Sell') {
+		return{
+			filters:{
+				property_status: ["in", ["For Sale", "For Rent And Sale"]],
+				'docstatus': 0
+			}
+	}
+	}
+	else if (transaction_type == 'Visit') {
+
+		
+			return{
+			filters:{
+				'docstatus': 0
+			}
+	}
+	}
+
+	};
+
+
 frappe.ui.form.on('Property Transaction', {
 	property: function (doc, dt, dn) {
 		if (cur_frm.doc.property != null) {
@@ -42,6 +73,33 @@ frappe.ui.form.on('Property Transaction', {
 				"customer_type": "Client",
 			}
 		}
+	},
+	transaction_type: function (frm) {
+		frm.set_value('property','')
+		$(cur_frm.fields_dict.property_details.wrapper).html('');
+		frm.set_value('sale_price','')
+		frm.set_value('actual_sale_price','')
+		frm.set_value('rent_price','')
+		frm.set_value('total_amount','')
+		frm.set_value('rent_duration','')
+		frm.set_value('rent_start_date','')
+		frm.set_value('rent_end_date','')
+		if(frm.doc.transaction_type=='Visit'){
+		frappe.call({
+			method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_visit_price",
+			callback: function(r, rt) {	
+				visit_price=r.message;
+				frm.set_value('total_amount', visit_price);
+			}
+		});
+	}
+		// frm.doc.sale_price=''
+
+	},
+	onload:function(frm){
+		if (frm.doc.property==null){
+		$(cur_frm.fields_dict.property_details.wrapper).html('');}
+
 	},
 	setup: function (frm) {
 		frm.fields_dict['client'].get_query = function (doc) {

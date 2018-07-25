@@ -12,8 +12,8 @@ class Property(Document):
 @frappe.whitelist()
 def get_contact_detail(customer_name):
 	return frappe.db.sql("""select email_id,phone from tabContact 
-		where first_name= (
-				select link_name from `tabDynamic Link` where link_doctype='Customer' and link_name=%s limit 1
+		where name= (
+				select parent from `tabDynamic Link` where link_doctype='Customer' and link_name=%s limit 1
 			)""",customer_name)
 
 

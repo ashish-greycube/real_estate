@@ -20,4 +20,4 @@ def get_client(doctype, txt, searchfield, start, page_len, filters):
 		})
 @frappe.whitelist()
 def get_property_detail(property_name):
-	return frappe.db.sql("""select for_customer,property_name,floor,address,property_type from `tabProperty` where docstatus=0 and name =%s""" ,property_name, as_dict=1)
+	return frappe.db.sql("""select customer,property_name,floor,address,property_type from `tabProperty` where docstatus=0 and name =%s""" ,property_name, as_dict=1)

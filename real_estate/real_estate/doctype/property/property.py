@@ -11,10 +11,9 @@ class Property(Document):
 
 @frappe.whitelist()
 def get_contact_detail(customer_name):
-	return frappe.db.sql("""select email_id,phone from tabContact 
-		where name= (
-				select parent from `tabDynamic Link` where link_doctype='Customer' and link_name=%s limit 1
-			)""",customer_name)
+	return frappe.db.sql("""select first_name, IFNULL(last_name,''),email_id,IFNULL(mobile_no,phone) from tabContact 
+		where name in (
+				select parent from `tabDynamic Link` where link_doctype='Customer' and link_name=%s ) order by is_primary_contact desc, creation desc limit 1""",customer_name)
 
 
 def get_owner(doctype, txt, searchfield, start, page_len, filters):

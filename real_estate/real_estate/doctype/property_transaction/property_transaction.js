@@ -31,6 +31,48 @@ cur_frm.fields_dict['property'].get_query = function(doc,cdt,cdn) {
 
 
 frappe.ui.form.on('Property Transaction', {
+
+	validate:function (frm) {
+		transaction_type=frm.doc.transaction_type
+		is_paid_by_client=frm.doc.is_paid_by_client
+		is_paid_by_owner=frm.doc.is_paid_by_owner
+		property=frm.doc.property
+
+		if (transaction_type == 'Rent' ||transaction_type == 'Sale' ) {
+			if(is_paid_by_client==0 && is_paid_by_owner==0){
+				frm.set_value('transaction_status','Unpaid')
+			}
+			if(is_paid_by_client==1 && is_paid_by_owner==0){
+				frm.set_value('transaction_status','Owner Unpaid')
+			}
+			if(is_paid_by_client==0 && is_paid_by_owner==1){
+				frm.set_value('transaction_status','Client Unpaid')
+			}
+			if(is_paid_by_client==1 && is_paid_by_owner==1){
+				frm.set_value('transaction_status','Paid')
+			}
+			if(transaction_type == 'Rent'){
+				set_property_status="Rented"
+			}
+			if(transaction_type == 'Sale'){
+				set_property_status="Sold"
+			}
+			frappe.call({
+				"method": "frappe.client.set_value",
+				"args": {
+					"doctype": "Property",
+					"name": property,
+					"fieldname": "property_status",
+					"value": set_property_status
+				}
+			});
+		}
+		else if (transaction_type == 'Visit' && frm.doc.status==="Submitted") {	
+			console.log(frm.doc.status)	
+			frm.set_value('transaction_status','Visit Fee Received')
+		}
+},
+
 	property: function (doc, dt, dn) {
 		if (cur_frm.doc.property != null) {
 			$(cur_frm.fields_dict.property_details.wrapper).html('');
@@ -72,6 +114,17 @@ frappe.ui.form.on('Property Transaction', {
 			}
 		}
 	},
+	rent_duration: function (frm) {
+		if (frm.doc.rent_duration!=""){
+			frm.set_value("rent_end_date", frappe.datetime.add_months(frm.doc.rent_start_date, frm.doc.rent_duration));
+			frm.set_value("total_amount",frm.doc.rent_price*frm.doc.rent_duration);
+		}
+	},
+	rent_start_date: function (frm) {
+		if (frm.doc.rent_start_date!=""){
+			frm.set_value("rent_end_date", frappe.datetime.add_months(frm.doc.rent_start_date, frm.doc.rent_duration));
+		}
+	},
 	transaction_type: function (frm) {
 		frm.set_value('property','')
 		$(cur_frm.fields_dict.property_details.wrapper).html('');
@@ -80,7 +133,7 @@ frappe.ui.form.on('Property Transaction', {
 		frm.set_value('rent_price','')
 		frm.set_value('total_amount','')
 		frm.set_value('rent_duration','')
-		frm.set_value('rent_start_date','')
+		
 		frm.set_value('rent_end_date','')
 		if(frm.doc.transaction_type=='Visit'){
 		frappe.call({
@@ -91,7 +144,21 @@ frappe.ui.form.on('Property Transaction', {
 			}
 		});
 	}
-	
+	},
+	is_paid_by_client: function (frm) {
+		if(frm.doc.is_paid_by_client==1)
+		{cur_frm.set_df_property("client_payment_date", "reqd", frm.doc.is_paid_by_client==1);}
+		else{
+			cur_frm.set_df_property("client_payment_date", "reqd", 0);
+		}
+
+	},
+	is_paid_by_owner: function (frm) {
+		if(frm.doc.is_paid_by_owner==1)
+		{cur_frm.set_df_property("owner_payment_date", "reqd", frm.doc.is_paid_by_owner==1);}
+		else{
+			cur_frm.set_df_property("owner_payment_date", "reqd", 0);
+		}
 
 	},
 	rent_price: function (frm) {
@@ -116,5 +183,36 @@ frappe.ui.form.on('Property Transaction', {
 			};
 
 		};
-	}
+		frm.set_indicator_formatter('transaction_type',
+		function(doc) {
+			let indicator = 'green';
+			if (doc.transaction_status == 'Unpaid') {
+				indicator = 'red';
+			}
+			else if (doc.transaction_status == 'Client Unpaid') {
+				indicator = 'orange';
+			}
+			else if (doc.transaction_status == 'Owner Unpaid') {
+				indicator = 'yellow';
+			}
+			else if (doc.transaction_status == 'Paid') {
+				indicator = 'blue';
+			}
+			return indicator;
+		}
+	);
+	},
+	transaction_status_refresh: function(frm) {
+		// var grid = frm.get_field('tasks').grid;
+		// grid.wrapper.find('select[data-fieldname="transaction_status"]').each(function() {
+		// 	if($(this).val()==='Open') {
+		// 		$(this).addClass('input-indicator-open');
+		// 	} else {
+		// 		$(this).removeClass('input-indicator-open');
+		// 	}
+		// });
+	},
+	transaction_status: function(frm, doctype, name) {
+		frm.trigger('transaction_status_refresh');
+	},
 });

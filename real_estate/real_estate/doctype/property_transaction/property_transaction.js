@@ -1,61 +1,73 @@
 // Copyright (c) 2018, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
-cur_frm.fields_dict['property'].get_query = function(doc,cdt,cdn) {
-	console.log(doc.transaction_type)
-	transaction_type=doc.transaction_type
+cur_frm.fields_dict['property'].get_query = function (doc, cdt, cdn) {
+	transaction_type = doc.transaction_type
 	if (transaction_type == 'Rent') {
-		return{
-			filters:{
+		return {
+			filters: {
 				property_status: ["in", ["For Rent", "For Rent And Sale"]],
 				'docstatus': 0
 			}
-	}}
-	else if (transaction_type == 'Sale') {
-		return{
-			filters:{
+		}
+	} else if (transaction_type == 'Sale') {
+		return {
+			filters: {
 				property_status: ["in", ["For Sale", "For Rent And Sale"]],
 				'docstatus': 0
 			}
-	}
-	}
-	else if (transaction_type == 'Visit') {		
-			return{
-			filters:{
+		}
+	} else if (transaction_type == 'Visit') {
+		return {
+			filters: {
+				property_status: ["in", ["For Rent","For Sale", "For Rent And Sale"]],
 				'docstatus': 0
 			}
+		}
 	}
-	}
-
-	};
-
+};
 
 frappe.ui.form.on('Property Transaction', {
 
-	validate:function (frm) {
-		transaction_type=frm.doc.transaction_type
-		is_paid_by_client=frm.doc.is_paid_by_client
-		is_paid_by_owner=frm.doc.is_paid_by_owner
-		property=frm.doc.property
+	before_submit: function (frm) {
+		console.log("inside submit")
+		console.log(frm.doc.status)
+		console.log(transaction_type)
+		transaction_type = frm.doc.transaction_type
+		property = frm.doc.property
+		if (transaction_type == 'Visit') {
+			frm.set_value('transaction_status', 'Visit Fee Received')
+			frm.refresh_field('transaction_status')
+		}
 
-		if (transaction_type == 'Rent' ||transaction_type == 'Sale' ) {
-			if(is_paid_by_client==0 && is_paid_by_owner==0){
-				frm.set_value('transaction_status','Unpaid')
+	},
+
+	validate: function (frm) {
+		console.log("inside validate")
+		transaction_type = frm.doc.transaction_type
+		is_paid_by_client = frm.doc.is_paid_by_client
+		is_paid_by_owner = frm.doc.is_paid_by_owner
+		property = frm.doc.property
+		console.log(frm.doc.status)
+		console.log(transaction_type)
+		if (transaction_type == 'Rent' || transaction_type == 'Sale') {
+			if (is_paid_by_client == 0 && is_paid_by_owner == 0) {
+				frm.set_value('transaction_status', 'Unpaid')
 			}
-			if(is_paid_by_client==1 && is_paid_by_owner==0){
-				frm.set_value('transaction_status','Owner Unpaid')
+			if (is_paid_by_client == 1 && is_paid_by_owner == 0) {
+				frm.set_value('transaction_status', 'Owner Unpaid')
 			}
-			if(is_paid_by_client==0 && is_paid_by_owner==1){
-				frm.set_value('transaction_status','Client Unpaid')
+			if (is_paid_by_client == 0 && is_paid_by_owner == 1) {
+				frm.set_value('transaction_status', 'Client Unpaid')
 			}
-			if(is_paid_by_client==1 && is_paid_by_owner==1){
-				frm.set_value('transaction_status','Paid')
+			if (is_paid_by_client == 1 && is_paid_by_owner == 1) {
+				frm.set_value('transaction_status', 'Paid')
 			}
-			if(transaction_type == 'Rent'){
-				set_property_status="Rented"
+			if (transaction_type == 'Rent') {
+				set_property_status = "Rented"
 			}
-			if(transaction_type == 'Sale'){
-				set_property_status="Sold"
+			if (transaction_type == 'Sale') {
+				set_property_status = "Sold"
 			}
 			frappe.call({
 				"method": "frappe.client.set_value",
@@ -66,12 +78,10 @@ frappe.ui.form.on('Property Transaction', {
 					"value": set_property_status
 				}
 			});
+			frm.refresh_field('property_status')
+			frm.refresh_field('transaction_status')
 		}
-		else if (transaction_type == 'Visit' && frm.doc.status==="Submitted") {	
-			console.log(frm.doc.status)	
-			frm.set_value('transaction_status','Visit Fee Received')
-		}
-},
+	},
 
 	property: function (doc, dt, dn) {
 		if (cur_frm.doc.property != null) {
@@ -107,7 +117,7 @@ frappe.ui.form.on('Property Transaction', {
 		}
 	},
 	refresh: function (frm) {
-		var so = frm.get_docfield("client");
+		var so = frm.get_docfield("customer");
 		so.get_route_options_for_new_doc = function (field) {
 			return {
 				"customer_type": "Client",
@@ -115,104 +125,92 @@ frappe.ui.form.on('Property Transaction', {
 		}
 	},
 	rent_duration: function (frm) {
-		if (frm.doc.rent_duration!=""){
+		if (frm.doc.rent_duration != "") {
 			frm.set_value("rent_end_date", frappe.datetime.add_months(frm.doc.rent_start_date, frm.doc.rent_duration));
-			frm.set_value("total_amount",frm.doc.rent_price*frm.doc.rent_duration);
+			frm.set_value("total_amount", frm.doc.rent_price * frm.doc.rent_duration);
 		}
 	},
 	rent_start_date: function (frm) {
-		if (frm.doc.rent_start_date!=""){
+		if (frm.doc.rent_start_date != "") {
 			frm.set_value("rent_end_date", frappe.datetime.add_months(frm.doc.rent_start_date, frm.doc.rent_duration));
 		}
 	},
 	transaction_type: function (frm) {
-		frm.set_value('property','')
+		frm.set_value('property', '')
 		$(cur_frm.fields_dict.property_details.wrapper).html('');
-		frm.set_value('sale_price','')
-		frm.set_value('actual_sale_price','')
-		frm.set_value('rent_price','')
-		frm.set_value('total_amount','')
-		frm.set_value('rent_duration','')
-		
-		frm.set_value('rent_end_date','')
-		if(frm.doc.transaction_type=='Visit'){
-		frappe.call({
-			method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_visit_price",
-			callback: function(r, rt) {	
-				visit_price=r.message;
-				frm.set_value('total_amount', visit_price);
-			}
-		});
-	}
+		frm.set_value('sale_price', '')
+		// frm.set_value('actual_sale_price','')
+		frm.set_value('rent_price', '')
+		frm.set_value('total_amount', '')
+		frm.set_value('rent_duration', '')
+
+		frm.set_value('rent_end_date', '')
+		if (frm.doc.transaction_type == 'Visit') {
+			frappe.call({
+				method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_visit_price",
+				callback: function (r, rt) {
+					visit_price = r.message;
+					frm.set_value('total_amount', visit_price);
+				}
+			});
+		}
 	},
 	is_paid_by_client: function (frm) {
-		if(frm.doc.is_paid_by_client==1)
-		{cur_frm.set_df_property("client_payment_date", "reqd", frm.doc.is_paid_by_client==1);}
-		else{
+		if (frm.doc.is_paid_by_client == 1) {
+			cur_frm.set_df_property("client_payment_date", "reqd", frm.doc.is_paid_by_client == 1);
+		} else {
 			cur_frm.set_df_property("client_payment_date", "reqd", 0);
 		}
 
 	},
 	is_paid_by_owner: function (frm) {
-		if(frm.doc.is_paid_by_owner==1)
-		{cur_frm.set_df_property("owner_payment_date", "reqd", frm.doc.is_paid_by_owner==1);}
-		else{
+		if (frm.doc.is_paid_by_owner == 1) {
+			cur_frm.set_df_property("owner_payment_date", "reqd", frm.doc.is_paid_by_owner == 1);
+		} else {
 			cur_frm.set_df_property("owner_payment_date", "reqd", 0);
 		}
 
 	},
 	rent_price: function (frm) {
-		frm.set_value('commission_from_owner',frm.doc.rent_price)
-		frm.set_value('commission_from_client',frm.doc.rent_price)
+		frm.set_value('commission_from_owner', frm.doc.rent_price)
+		frm.set_value('commission_from_client', frm.doc.rent_price)
 	},
-	actual_sale_price: function (frm) {
-		if (frm.doc.actual_sale_price>0){
-		frm.set_value('commission_from_owner',frm.doc.actual_sale_price*0.01)
-		frm.set_value('commission_from_client',frm.doc.actual_sale_price*0.01)
+	sale_price: function (frm) {
+		if (frm.doc.sale_price > 0) {
+			frm.set_value('commission_from_owner', frm.doc.sale_price * 0.01)
+			frm.set_value('commission_from_client', frm.doc.sale_price * 0.01)
 		}
 	},
-	onload:function(frm){
-		if (frm.doc.property==null){
-		$(cur_frm.fields_dict.property_details.wrapper).html('');}
+	onload: function (frm) {
+		if (frm.doc.property == null) {
+			$(cur_frm.fields_dict.property_details.wrapper).html('');
+		}
 
 	},
 	setup: function (frm) {
-		frm.fields_dict['client'].get_query = function (doc) {
+		frm.fields_dict['customer'].get_query = function (doc) {
 			return {
 				query: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_client"
 			};
 
 		};
-		frm.set_indicator_formatter('transaction_type',
-		function(doc) {
-			let indicator = 'green';
-			if (doc.transaction_status == 'Unpaid') {
-				indicator = 'red';
+		frm.set_indicator_formatter('transaction_status',
+			function (doc) {
+				let indicator = 'dark grey';
+				if (doc.transaction_status == 'Unpaid') {
+					indicator = 'red';
+				} else if (doc.transaction_status == 'Client Unpaid') {
+					indicator = 'orange';
+				} else if (doc.transaction_status == 'Owner Unpaid') {
+					indicator = 'yellow';
+				} else if (doc.transaction_status == 'Paid') {
+					indicator = 'blue';
+				}else if (doc.transaction_status == 'Visit Fee Received') {
+					indicator = 'green';
+				}
+				return indicator;
 			}
-			else if (doc.transaction_status == 'Client Unpaid') {
-				indicator = 'orange';
-			}
-			else if (doc.transaction_status == 'Owner Unpaid') {
-				indicator = 'yellow';
-			}
-			else if (doc.transaction_status == 'Paid') {
-				indicator = 'blue';
-			}
-			return indicator;
-		}
-	);
+		);
 	},
-	transaction_status_refresh: function(frm) {
-		// var grid = frm.get_field('tasks').grid;
-		// grid.wrapper.find('select[data-fieldname="transaction_status"]').each(function() {
-		// 	if($(this).val()==='Open') {
-		// 		$(this).addClass('input-indicator-open');
-		// 	} else {
-		// 		$(this).removeClass('input-indicator-open');
-		// 	}
-		// });
-	},
-	transaction_status: function(frm, doctype, name) {
-		frm.trigger('transaction_status_refresh');
-	},
+
 });

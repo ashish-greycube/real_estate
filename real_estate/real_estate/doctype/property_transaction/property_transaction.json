@@ -906,7 +906,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-07-30 14:36:29.855191", 
+ "modified": "2018-08-01 05:02:34.974224", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "Property Transaction", 
@@ -916,7 +916,7 @@
   {
    "amend": 0, 
    "apply_user_permissions": 0, 
-   "cancel": 0, 
+   "cancel": 1, 
    "create": 1, 
    "delete": 1, 
    "email": 1, 

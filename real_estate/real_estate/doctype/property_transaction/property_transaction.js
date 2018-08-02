@@ -123,6 +123,7 @@ frappe.ui.form.on('Property Transaction', {
 				"customer_type": "Client",
 			}
 		}
+		cur_frm.add_fetch("property", "property_status", "property_status");
 	},
 	rent_duration: function (frm) {
 		if (frm.doc.rent_duration != "") {
@@ -185,7 +186,7 @@ frappe.ui.form.on('Property Transaction', {
 		if (frm.doc.property == null) {
 			$(cur_frm.fields_dict.property_details.wrapper).html('');
 		}
-
+		cur_frm.add_fetch("property", "property_status", "property_status");
 	},
 	setup: function (frm) {
 		frm.fields_dict['customer'].get_query = function (doc) {

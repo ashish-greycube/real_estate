@@ -5,9 +5,28 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+from frappe.website.website_generator import WebsiteGenerator
+from frappe import _
+from frappe.utils import (cstr)
 
-class Property(Document):
-	pass
+class Property(WebsiteGenerator):
+	website = frappe._dict(
+		template = "templates/generators/property.html",
+		condition_field = "show_in_website",
+		page_title_field = "property_name",
+		no_cache = 1
+	)
+
+	def validate(self):
+		if not self.route:
+			self.route = cstr('Properties')+'/'+cstr(self.property_status)+'/'+frappe.scrub(self.property_name).replace('_', '-')
+
+	def get_context(self, context):
+		context.parents = [{'name': self.property_status }]
+
+def get_list_context(context):
+	context.title = _("Property")
+	context.introduction = _('Current Open Property')
 
 @frappe.whitelist()
 def get_contact_detail(customer_name):

@@ -14,6 +14,7 @@ class Property(WebsiteGenerator):
 		template = "templates/generators/property.html",
 		condition_field = "show_in_website",
 		page_title_field = "property_name",
+		allow_guest_to_view=1,
 		no_cache = 1
 	)
 

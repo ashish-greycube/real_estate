@@ -35,18 +35,53 @@ class Property(WebsiteGenerator):
 			}
 
 		api = get_api(cfg)
-		message="Property : "+self.property_name
-		#  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
-		photo = open(get_file_path(self.property_photo), 'rb')
 
-		# Upload a profile photo for a Page.
-		# status=api.put_photo(image=open("/home/ashish/Pictures/ashish.png",'rb').read(), message='Heres my image')
-		# tags = json.dumps([{"x":50, "y":50, "tag_text":'Home for sell'}, {"x":10, "y":60, "tag_text":'a turtle'}])
-		# tags = json.dumps([{'x':50, 'y':50, 'tag_uid':12345}, {'x':10, 'y':60,'tag_text':'a turtle'}])
-		# print tags
-		status=api.put_photo(photo, message=message,caption=self.property_name,link='https://google.com')
+##multi
+		print"--------------------------------------------------------------"
+		imgs_id = []
+		# retrieve property photo
+		if self.property_photo:
+			photo = open(get_file_path(self.property_photo), 'rb')
+			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
+			photo.close()
+		# retrieve property slide show photos
+		for img in self.get("slideshow_items"):
+			photo = open(get_file_path(img.image), 'rb')
+			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
+			photo.close()
+		print(imgs_id)
+		args=dict()
+
+		message="Property : "+self.property_name
+		# #  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
+	
+		if imgs_id:
+			args["message"]=message
+			for img_id in imgs_id:
+				key="attached_media["+str(imgs_id.index(img_id))+"]"
+				args[key]="{'media_fbid': '"+img_id+"'}"
+			print(args)
+			status=api.request(path='/me/feed', args=None, post_args=args, method='POST')
+		print"--------------------------------------------------------------"
+		print status
 		return status
-		# status = api.put_wall_post(msg)
+##multi
+
+
+
+		# photo_list=[]
+		# imgs_id = []
+		# for i in range(3):
+		# 	message="Property : "+self.property_name
+		# #  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
+		# 	photo = open(get_file_path(self.property_photo), 'rb')
+		# 	status=api.put_photo(photo,published='False',message=message,caption=self.property_name,link='https://google.com')
+		# 	print(status)
+		# 	photo_list.append(status['id'])
+		# 	print(i)
+		# 	print"--------------------------------------------------------------"
+		# print(photo_list)
+		# return status	
 
 
 def get_api(cfg):

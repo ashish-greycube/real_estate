@@ -31,6 +31,20 @@ frappe.ui.form.on('Property', {
 	},
 	post_to_fb: function(frm) {
 		frappe.msgprint(frm.call('publish_to_facebook'));
+
+		// frappe.call({
+		// 	method: 'real_estate.real_estate.doctype.property.property.publish_to_facebook',
+		// 	callback: function(r) {	
+		// 		if(!r.exc) {
+		// 			if(r.message) {
+		// 				frappe.msgprint(r.message);
+		// 			} else {
+		// 				frappe.msgprint("failed");
+		// 			}
+		// 		}				
+
+		// 	}
+		// });
 	}
 
 });

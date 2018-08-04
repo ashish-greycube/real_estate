@@ -28,5 +28,9 @@ frappe.ui.form.on('Property', {
 				query: "real_estate.real_estate.doctype.property.property.get_owner"
 			}
 		}
+	},
+	post_to_fb: function(frm) {
+		frappe.msgprint(frm.call('publish_to_facebook'));
 	}
+
 });

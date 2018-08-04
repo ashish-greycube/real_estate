@@ -4,10 +4,12 @@
 
 from __future__ import unicode_literals
 import frappe
+import facebook
 from frappe.model.document import Document
 from frappe.website.website_generator import WebsiteGenerator
 from frappe import _
 from frappe.utils import (cstr)
+from frappe.utils.file_manager import save_file, get_file,get_file_path
 
 class Property(WebsiteGenerator):
 	website = frappe._dict(
@@ -24,6 +26,47 @@ class Property(WebsiteGenerator):
 
 	def get_context(self, context):
 		context.parents = [{'name': self.property_status }]
+
+	def publish_to_facebook(self):
+			# Fill in the values noted in previous steps here
+		cfg = {
+			"page_id"      : "641303646232151",  # Step 1
+			"access_token" : "EAAC6Oqelg08BADK0ZAuaXv7Mn6ZBcA9emP4uSmCEQqFrlzGQjsehvTkrCXyJq2ZCvAFcee0V0osn2GGg7m8oFh31FrqdYdW2dBgafgPvFtZBWe4DYhBrQJBty6ZC1GWWu2kq8fYKjw8TD7ThAOGD8ZAzCgRDzZCdSgMOFe8uBmedB9t656GIbZBP"
+			}
+
+		api = get_api(cfg)
+		message="Property : "+self.property_name
+		#  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
+		photo = open(get_file_path(self.property_photo), 'rb')
+
+		# Upload a profile photo for a Page.
+		# status=api.put_photo(image=open("/home/ashish/Pictures/ashish.png",'rb').read(), message='Heres my image')
+		# tags = json.dumps([{"x":50, "y":50, "tag_text":'Home for sell'}, {"x":10, "y":60, "tag_text":'a turtle'}])
+		# tags = json.dumps([{'x':50, 'y':50, 'tag_uid':12345}, {'x':10, 'y':60,'tag_text':'a turtle'}])
+		# print tags
+		status=api.put_photo(photo, message=message,caption=self.property_name,link='https://google.com')
+		return status
+		# status = api.put_wall_post(msg)
+
+
+def get_api(cfg):
+  graph = facebook.GraphAPI(cfg['access_token'])
+  # Get page token to post as the page. You can skip 
+  # the following if you want to post as yourself. 
+  resp = graph.get_object('me/accounts')
+  page_access_token = None
+  for page in resp['data']:
+    if page['id'] == cfg['page_id']:
+      page_access_token = page['access_token']
+  graph = facebook.GraphAPI(page_access_token)
+  # graph.put_photo(image=open("/home/ashish/frappe-bench-master/apps/post_to_fb/post_to_fb/www/greycubelogo1200a5c2fd.png", 'rb'),album_path='641303646232151' + "/picture")
+  return graph
+  # You can also skip the above if you get a page token:
+  # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
+  # and make that long-lived token as in Step 3
+
+if __name__ == "__main__":
+  main()
 
 def get_list_context(context):
 	context.title = _("Property")

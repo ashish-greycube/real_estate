@@ -9,6 +9,43 @@
 
 </head>
 <body>
+        <script>
+                window.fbAsyncInit = function() {
+                  FB.init({
+                    appId            : '506334379802931',
+                    autoLogAppEvents : true,
+                    xfbml            : true,
+                    version          : 'v3.1'
+                  });
+                };
+              
+                (function(d, s, id){
+                   var js, fjs = d.getElementsByTagName(s)[0];
+                   if (d.getElementById(id)) {return;}
+                   js = d.createElement(s); js.id = id;
+                   js.src = "https://connect.facebook.net/en_US/sdk.js";
+                   fjs.parentNode.insertBefore(js, fjs);
+                 }(document, 'script', 'facebook-jssdk'));
+              </script>
+            <div class="page-header">
+                <h1>Share Dialog</h1>
+              </div>
+              
+              <p>Click the button below to trigger a Share Dialog</p>
+              
+              <div id="shareBtn" class="btn btn-success clearfix">Share</div>
+              
+       
+              
+              <script>
+              document.getElementById('shareBtn').onclick = function() {
+                FB.ui({
+                  method: 'share',
+                  display: 'popup',
+                  href: 'https://demo.immovy.com/property_vila.html',
+                }, function(response){});
+              }
+              </script>
     <title>
         Villa Property
     </title>

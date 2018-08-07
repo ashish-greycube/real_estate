@@ -52,7 +52,8 @@ frappe.ui.form.on('Property', {
 		html='<meta property="og:image"  content="'+file_detail+'"/>'
 		console.log(html)
 		$(cur_frm.fields_dict.image_html.wrapper).html(html);
-		frm.refresh_field('image_html')
+		$(html).appendTo($('body'))
+		cur_frm.refresh_field('image_html')
         frm.add_custom_button("Post to FB",
             function () {
                 FB.ui({

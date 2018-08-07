@@ -1,39 +1,40 @@
-<!-- 
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=506334379802931';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-login-button" 
-        data-scope="manage_pages,publish_pages" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div> -->
-        <h1>Basic Login</h1>
-
-        <p>These examples show the bare minimum required to get Facebook Login operational in a couple of different ways. You'll still want to add more to your code to get it to an ideal state, so try more of our more complex examples or read <a href="https://developers.facebook.com/docs/facebook-login/login-flow-for-web/">our guide to using the JavaScript SDK for Facebook Login.</a></p>
-        
-        <h2>Using an SDK function</h2>
-        <p>This example makes the link below trigger <code>FB.login()</code> and prompts you with the Login Dialog if you're not already logged in:</p>
-        
-        <a href="#" id="login-btn">Log in with Facebook</a>
-        
-        <script type="text/javascript">
-        document.getElementById('login-btn').onclick = function() {
-          FB.login(function(response) {
-            Log.info('FB.login response', response);
-          });
-          return false;
-        }
-        </script>
-        
-        <h2>Using the Login Button</h2>
-        
-        <p>You can also use the <a href="https://developers.facebook.com/docs/plugins/login-button/">Login Button social plugin</a> to initiate Facebook Login:</p>
-        
-        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-auto-logout-link="false"></div>
-        
-        <h3>Related Guides</h3>
-        
-        <p>Read <a href="https://developers.facebook.com/docs/facebook-login/login-flow-for-web/">our guide to using the JavaScript SDK for Facebook Login</a> to see the best way to use Facebook Login.</p>
-        
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '506334379802931',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v3.1'
+      });
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+<div class="page-header">
+    <h1>Share Dialog</h1>
+  </div>
+  
+  <p>Click the button below to trigger a Share Dialog</p>
+  
+  <div id="shareBtn" class="btn btn-success clearfix">Share</div>
+  
+  <p style="margin-top: 50px">
+    <hr />
+    <a class="btn btn-small"  href="https://developers.facebook.com/docs/sharing/reference/share-dialog">Share Dialog Documentation</a>
+  </p>
+  
+  <script>
+  document.getElementById('shareBtn').onclick = function() {
+    FB.ui({
+      method: 'share',
+      display: 'popup',
+      href: 'https://developers.facebook.com/docs/',
+    }, function(response){});
+  }
+  </script>

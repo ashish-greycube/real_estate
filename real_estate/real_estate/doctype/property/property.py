@@ -30,10 +30,10 @@ class Property(WebsiteGenerator):
 	def publish_to_facebook(self):
 			# Fill in the values noted in previous steps here
 		cfg = {
-			# "page_id"      : "313618416046043",
-			"page_id"      : "641303646232151",  # Step 1
-			"access_token" : "EAAC6Oqelg08BADK0ZAuaXv7Mn6ZBcA9emP4uSmCEQqFrlzGQjsehvTkrCXyJq2ZCvAFcee0V0osn2GGg7m8oFh31FrqdYdW2dBgafgPvFtZBWe4DYhBrQJBty6ZC1GWWu2kq8fYKjw8TD7ThAOGD8ZAzCgRDzZCdSgMOFe8uBmedB9t656GIbZBP"
-			# "access_token" : "EAAHMgijYgTMBAAXYJXMQ3biYuo4txWjAKZChWRqZCKBuXFxuaArnod0oVsxjrnMxonyqqkZCjPAJ2ZB89Fuxx8aZBBNy19pxYcrPRSpP9RQuI0LSxoldg3ECl9hprffA78FoooDTRcv4i0ZCJ2GCpl8enuz5QizUGE3PztHTQzXEwOukMZA6V1T"
+			"page_id"      : "313618416046043",
+			# "page_id"      : "641303646232151",  # Step 1
+			# "access_token" : "EAAC6Oqelg08BADK0ZAuaXv7Mn6ZBcA9emP4uSmCEQqFrlzGQjsehvTkrCXyJq2ZCvAFcee0V0osn2GGg7m8oFh31FrqdYdW2dBgafgPvFtZBWe4DYhBrQJBty6ZC1GWWu2kq8fYKjw8TD7ThAOGD8ZAzCgRDzZCdSgMOFe8uBmedB9t656GIbZBP"
+			 "access_token" : "EAAHMgijYgTMBAAXYJXMQ3biYuo4txWjAKZChWRqZCKBuXFxuaArnod0oVsxjrnMxonyqqkZCjPAJ2ZB89Fuxx8aZBBNy19pxYcrPRSpP9RQuI0LSxoldg3ECl9hprffA78FoooDTRcv4i0ZCJ2GCpl8enuz5QizUGE3PztHTQzXEwOukMZA6V1T"
 			}
 
 		api = get_api(cfg)

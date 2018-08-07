@@ -6,32 +6,34 @@
 <meta property="og:type" content="video.movie" />
 <meta property="og:url" content="https://demo.immovy.com/property_vila.html" />
 <meta property="og:image" content="https://demo.immovy.com/files/villa_mona.jpeg" />
+<meta property="og:description"        content="How long can you postpone buying this property?" />
 
 </head>
+<script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : '506334379802931',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.1'
+          });
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
 <body>
-        <script>
-                window.fbAsyncInit = function() {
-                  FB.init({
-                    appId            : '506334379802931',
-                    autoLogAppEvents : true,
-                    xfbml            : true,
-                    version          : 'v3.1'
-                  });
-                };
-              
-                (function(d, s, id){
-                   var js, fjs = d.getElementsByTagName(s)[0];
-                   if (d.getElementById(id)) {return;}
-                   js = d.createElement(s); js.id = id;
-                   js.src = "https://connect.facebook.net/en_US/sdk.js";
-                   fjs.parentNode.insertBefore(js, fjs);
-                 }(document, 'script', 'facebook-jssdk'));
-              </script>
+
             <div class="page-header">
                 <h1>Share Dialog</h1>
               </div>
               
-              <p>Click the button below to trigger a Share Dialog</p>
+              <p>Click the Share link below to trigger a Share Dialog</p>
               
               <div id="shareBtn" class="btn btn-success clearfix">Share</div>
               
@@ -49,6 +51,7 @@
     <title>
         Villa Property
     </title>
+    
 
         <img src="https://demo.immovy.com/files/villa_mona.jpeg">
 </body>

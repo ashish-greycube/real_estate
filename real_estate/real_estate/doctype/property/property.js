@@ -54,7 +54,7 @@ frappe.ui.form.on('Property', {
 
 		html = '<meta property="og:image"  content="' + file_detail + '"/>'
 		console.log(html)
-		property_url=frappe.urllib.get_base_url() +frm.doc.route
+		property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
 		console.log(property_url)
 		// $(cur_frm.fields_dict.image_html.wrapper).html(html);
 		frm.set_value('image_html', html)

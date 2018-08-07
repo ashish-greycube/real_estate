@@ -46,13 +46,19 @@ frappe.ui.form.on('Property', {
 			}
 		}
 	},
-	onload: function (frm, cdt, cdn) {
+	refresh: function (frm, cdt, cdn) {
+		file_detail=frappe.urllib.get_base_url()+cur_frm.get_files()[0].file_url
+		
+		html='<meta property="og:image"  content="'+file_detail+'"/>'
+		console.log(html)
+		$(cur_frm.fields_dict.image_html.wrapper).html(html);
+		frm.refresh_field('image_html')
         frm.add_custom_button("Post to FB",
             function () {
                 FB.ui({
                     method: 'share',
-                    display: 'popup',
-                    href: 'https://demo.immovy.com/property_vila.html',
+                    display: 'popup'
+                    // href: ,
                   }, function(response){});
 
             }

@@ -137,15 +137,28 @@ frappe.ui.form.on('Property Transaction', {
 		}
 	},
 	transaction_type: function (frm) {
-		frm.set_value('property', '')
-		$(cur_frm.fields_dict.property_details.wrapper).html('');
-		frm.set_value('sale_price', '')
-		// frm.set_value('actual_sale_price','')
-		frm.set_value('rent_price', '')
-		frm.set_value('total_amount', '')
-		frm.set_value('rent_duration', '')
 
+		//Clear all fileds when transaction type changes
+		frm.set_value('property', '')
+		frm.set_value('property_name', '')
+		frm.set_value('property_status', '')
+		frm.set_value('transaction_status', 'None')
+		$(cur_frm.fields_dict.property_details.wrapper).html('');
+		frm.set_value('rent_price', '')
+		frm.set_value('rent_duration', '')
+		frm.set_value('rent_start_date',frappe.datetime.get_today() )
 		frm.set_value('rent_end_date', '')
+		frm.set_value('sale_price', '')
+		frm.set_value('negotiable', '')
+		frm.set_value('total_amount', '')
+		frm.set_value('notes', '')
+		frm.set_value('commission_from_owner', '')
+		frm.set_value('is_paid_by_owner', '')
+		frm.set_value('owner_payment_date', '')
+		frm.set_value('commission_from_client', '')
+		frm.set_value('is_paid_by_client', '')
+		frm.set_value('client_payment_date', '')
+		
 		if (frm.doc.transaction_type == 'Visit') {
 			frappe.call({
 				method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_visit_price",

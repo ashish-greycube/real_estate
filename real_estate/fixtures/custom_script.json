@@ -1,0 +1,11 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Customer", 
+  "modified": "2018-08-07 06:16:01.187703", 
+  "name": "Customer-Client", 
+  "script": "frappe.ui.form.on(\"Customer\", \"onload_post_render\", function (frm) {\n    if (frm.doc.customer_type == 'Client' || frm.doc.customer_type == 'Owner') {\n        frm.clear_custom_buttons()\n        frm.dashboard.hide()\n    }\n});", 
+  "script_type": "Client"
+ }
+]

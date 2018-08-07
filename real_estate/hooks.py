@@ -120,3 +120,11 @@ website_generators = ["Property"]
 # 	"frappe.desk.doctype.event.event.get_events": "real_estate.event.get_events"
 # }
 
+fixtures = [
+    	{
+		"dt":"Custom Script",
+		"filters":[
+			["name", "in", ["Customer-Client"]],
+		]
+	}
+]

@@ -30,21 +30,19 @@ frappe.ui.form.on('Property', {
 		}
 	},
 	post_to_fb: function(frm) {
-		frappe.msgprint( frm.call('publish_to_facebook'));
-
-		// frappe.call({
-		// 	method: 'real_estate.real_estate.doctype.property.property.publish_to_facebook',
-		// 	callback: function(r) {	
-		// 		if(!r.exc) {
-		// 			if(r.message) {
-		// 				frappe.msgprint(r.message);
-		// 			} else {
-		// 				frappe.msgprint("failed");
-		// 			}
-		// 		}				
-
-		// 	}
-		// });
+		return( 
+			frm.call({
+			method:'publish_to_facebook',
+			doc: frm.doc,
+			freeze: true,
+			freeze_message:"Hello",
+			callback: (r) => {
+				
+				if(r.message){
+					console.log(r.message)
+					frappe.msgprint(r.message.id);
+				}
+			}})	
+	);
 	}
-
 });

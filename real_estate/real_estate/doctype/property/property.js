@@ -54,7 +54,10 @@ frappe.ui.form.on('Property', {
 
 		html = '<meta property="og:image"  content="' + file_detail + '"/>'
 		console.log(html)
-		$(cur_frm.fields_dict.image_html.wrapper).html(html);
+		property_url=frappe.urllib.get_base_url() +frm.doc.route
+		console.log(property_url)
+		// $(cur_frm.fields_dict.image_html.wrapper).html(html);
+		frm.set_value('image_html', html)
 		$(html).appendTo($('body'))
 		cur_frm.refresh_field('image_html')
 		frm.add_custom_button("Post to FB",
@@ -62,7 +65,8 @@ frappe.ui.form.on('Property', {
 				FB.ui({
 					method: 'share',
 					display: 'popup',
-					href: window.location.href,
+					// href: window.location.href,
+					href:property_url
 				}, function (response) {});
 
 			}

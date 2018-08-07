@@ -2,12 +2,12 @@
 // For license information, please see license.txt
 
 window.fbAsyncInit = function() {
-    FB.init({
-      appId            : 'your-app-id',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v3.1'
-    });
+	FB.init({
+	  appId            : '506334379802931',
+	  autoLogAppEvents : true,
+	  xfbml            : true,
+	  version          : 'v3.1'
+	});
   };
 
   (function(d, s, id){
@@ -17,7 +17,7 @@ window.fbAsyncInit = function() {
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-   
+
 frappe.ui.form.on('Property', {
 	customer: function (frm) {
 		frm.set_value('contact_email', "")
@@ -47,7 +47,7 @@ frappe.ui.form.on('Property', {
 		}
 	},
 	onload: function (frm, cdt, cdn) {
-        frm.add_custom_button("Reconciliation",
+        frm.add_custom_button("Post to FB",
             function () {
                 FB.ui({
                     method: 'share',

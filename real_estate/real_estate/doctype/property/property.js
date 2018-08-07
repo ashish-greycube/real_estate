@@ -52,7 +52,8 @@ frappe.ui.form.on('Property', {
 	refresh: function (frm, cdt, cdn) {
 		file_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
 
-		html = '<meta property="og:image"  content="' + file_detail + '"/>'
+		// html = '<meta property="og:image"  content="' + file_detail + '"/>'
+		html=file_detail
 		console.log(html)
 		property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
 		console.log(property_url)

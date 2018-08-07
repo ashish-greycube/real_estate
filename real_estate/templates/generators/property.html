@@ -19,9 +19,9 @@
 					{% include "templates/includes/slideshow.html" %}
 				{% else %}
 					{{ product_image(property_photo, "product-full-image") }}
-					{{image_html}}
-
 				
+
+					<meta property="og:image"  content={{image_html}}/>
 				
 				{% endif %}
 			</div>

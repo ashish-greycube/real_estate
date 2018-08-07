@@ -52,13 +52,12 @@ frappe.ui.form.on('Property', {
 	refresh: function (frm, cdt, cdn) {
 		file_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
 
-		// html = '<meta property="og:image"  content="' + file_detail + '"/>'
-		html=file_detail
+		html = '<meta property="og:image"  content="' + file_detail + '"/>'
 		console.log(html)
 		property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
 		console.log(property_url)
 		// $(cur_frm.fields_dict.image_html.wrapper).html(html);
-		frm.set_value('image_html', html)
+		frm.set_value('image_html', file_detail)
 		$(html).appendTo($('body'))
 		cur_frm.refresh_field('image_html')
 		frm.add_custom_button("Post to FB",

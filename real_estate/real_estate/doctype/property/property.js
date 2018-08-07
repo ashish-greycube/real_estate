@@ -1,6 +1,23 @@
 // Copyright (c) 2018, GreyCube Technologies and contributors
 // For license information, please see license.txt
 
+window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 'your-app-id',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.1'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+   
 frappe.ui.form.on('Property', {
 	customer: function (frm) {
 		frm.set_value('contact_email', "")
@@ -29,6 +46,19 @@ frappe.ui.form.on('Property', {
 			}
 		}
 	},
+	onload: function (frm, cdt, cdn) {
+        frm.add_custom_button("Reconciliation",
+            function () {
+                FB.ui({
+                    method: 'share',
+                    display: 'popup',
+                    href: 'https://demo.immovy.com/property_vila.html',
+                  }, function(response){});
+
+            }
+        );
+
+    },
 	post_to_fb: function(frm) {
 		return( 
 			frm.call({

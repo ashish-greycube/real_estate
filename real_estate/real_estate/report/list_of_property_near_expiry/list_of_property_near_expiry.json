@@ -1,0 +1,24 @@
+{
+ "add_total_row": 1, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-08-08 14:12:48.478769", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "letter_head": "Immovy", 
+ "modified": "2018-08-08 14:12:48.478769", 
+ "modified_by": "Administrator", 
+ "module": "Real Estate", 
+ "name": "List Of Property Near Expiry", 
+ "owner": "Administrator", 
+ "ref_doctype": "Property Transaction", 
+ "report_name": "List Of Property Near Expiry", 
+ "report_type": "Query Report", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

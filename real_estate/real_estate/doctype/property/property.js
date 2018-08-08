@@ -67,6 +67,8 @@ frappe.ui.form.on('Property', {
 			console.log(html)
 			// $(html).appendTo($('body'))
 			cur_frm.refresh_field('image_0_html')
+	
+
 			frm.add_custom_button("Post to FB",
 				function () {
 					FB.ui({
@@ -75,7 +77,8 @@ frappe.ui.form.on('Property', {
 						href:property_url
 					}, function (response) {});
 	
-				}
+				}, "fa fa-retweet",
+				"btn btn-primary btn-sm primary-action"
 			);
 			
 		}

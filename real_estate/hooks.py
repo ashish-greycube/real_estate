@@ -126,5 +126,11 @@ fixtures = [
 		"filters":[
 			["name", "in", ["Customer-Client"]],
 		]
+	},
+	    	{
+		"dt":"Role",
+		"filters":[
+			["name", "in", ["Agency Staff","Agency Owner"]],
+		]
 	}
 ]

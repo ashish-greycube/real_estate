@@ -53,6 +53,7 @@ frappe.ui.form.on('Property', {
 		}
 	},
 	refresh: function (frm, cdt, cdn) {
+		frm.set_value('show_in_website', 1)
 		if(cur_frm.get_files().length!=0){
 			// Use images that are at least 1200 x 630 pixels for the best display on high resolution devices. At the minimum, you should use images that are 600 x 315 pixels
 			file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
@@ -71,7 +72,6 @@ frappe.ui.form.on('Property', {
 					FB.ui({
 						method: 'share',
 						display: 'popup',
-						href: window.location.href,
 						href:property_url
 					}, function (response) {});
 	

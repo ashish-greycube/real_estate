@@ -61,6 +61,7 @@ frappe.ui.form.on('Property', {
 			property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
 			console.log(property_url)
 			frm.set_value('image_0_html', file_0_detail)
+			frm.set_value('base_url', frappe.urllib.get_base_url())
 			// frm.set_value('image_1_html', file_1_detail)
 			console.log(html)
 			// $(html).appendTo($('body'))

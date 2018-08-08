@@ -168,6 +168,7 @@ frappe.ui.form.on('Property Transaction', {
 				}
 			});
 		}
+
 	},
 	is_paid_by_client: function (frm) {
 		if (frm.doc.is_paid_by_client == 1) {

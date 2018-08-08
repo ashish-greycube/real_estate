@@ -21,6 +21,9 @@ class Property(WebsiteGenerator):
 	)
 
 	def validate(self):
+		
+		self.fb_app_id=frappe.db.get_single_value('FaceBook Settings', 'fb_app_id')
+		self.fb_page_id=frappe.db.get_single_value('FaceBook Settings', 'facebook_page_id')
 		if not self.route:
 			self.route = cstr('Properties')+'/'+cstr(self.property_status)+'/'+frappe.scrub(self.property_name).replace('_', '-')
 

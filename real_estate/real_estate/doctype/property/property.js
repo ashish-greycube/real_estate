@@ -2,8 +2,11 @@
 // For license information, please see license.txt
 
 window.fbAsyncInit = function () {
+	console.log("inside")
+	console.log(cur_frm.doc.fb_app_id)
 	FB.init({
-		appId: '506334379802931',
+		// appId: '506334379802931',
+		appId: cur_frm.doc.fb_app_id,
 		autoLogAppEvents: true,
 		xfbml: true,
 		version: 'v3.1'
@@ -50,28 +53,32 @@ frappe.ui.form.on('Property', {
 		}
 	},
 	refresh: function (frm, cdt, cdn) {
-		file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
-		file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
-		html = '<meta property="og:image"  content="' + file_0_detail + '"/>'
-		console.log(html)
-		property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
-		console.log(property_url)
-		// $(cur_frm.fields_dict.image_html.wrapper).html(html);
-		frm.set_value('image_0_html', file_0_detail)
-		frm.set_value('image_1_html', file_1_detail)
-		$(html).appendTo($('body'))
-		cur_frm.refresh_field('image_0_html')
-		frm.add_custom_button("Post to FB",
-			function () {
-				FB.ui({
-					method: 'share',
-					display: 'popup',
-					// href: window.location.href,
-					href:property_url
-				}, function (response) {});
+		if(cur_frm.get_files().length!=0){
+			// Use images that are at least 1200 x 630 pixels for the best display on high resolution devices. At the minimum, you should use images that are 600 x 315 pixels
+			file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
+			// file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
+			html = '<meta property="og:image"  content="' + file_0_detail + '"/>'
+			property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
+			console.log(property_url)
+			frm.set_value('image_0_html', file_0_detail)
+			// frm.set_value('image_1_html', file_1_detail)
+			console.log(html)
+			// $(html).appendTo($('body'))
+			cur_frm.refresh_field('image_0_html')
+			frm.add_custom_button("Post to FB",
+				function () {
+					FB.ui({
+						method: 'share',
+						display: 'popup',
+						href: window.location.href,
+						href:property_url
+					}, function (response) {});
+	
+				}
+			);
+			
+		}
 
-			}
-		);
 
 	},
 	post_to_fb: function (frm) {

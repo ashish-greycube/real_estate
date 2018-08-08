@@ -13,6 +13,8 @@ window.fbAsyncInit = function () {
 	});
 };
 
+
+
 (function (d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) {
@@ -25,6 +27,8 @@ window.fbAsyncInit = function () {
 }(document, 'script', 'facebook-jssdk'));
 
 frappe.ui.form.on('Property', {
+
+
 	customer: function (frm) {
 		frm.set_value('contact_email', "")
 		frm.set_value('contact_phone', "")
@@ -55,8 +59,16 @@ frappe.ui.form.on('Property', {
 	refresh: function (frm, cdt, cdn) {
 		frm.set_value('show_in_website', 1)
 		if(cur_frm.get_files().length!=0){
+			
 			// Use images that are at least 1200 x 630 pixels for the best display on high resolution devices. At the minimum, you should use images that are 600 x 315 pixels
 			file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
+			var img = new Image();
+			img.onload = function(){
+				frm.set_value('image_0_width', this.width)
+				frm.set_value('image_0_height',  this.height)
+			};
+			img.src = file_0_detail;
+			// getMeta(file_0_detail);
 			// file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
 			html = '<meta property="og:image"  content="' + file_0_detail + '"/>'
 			property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route

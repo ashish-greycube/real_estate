@@ -25,10 +25,9 @@ class Property(WebsiteGenerator):
 		self.fb_page_id=frappe.db.get_single_value('FaceBook Settings', 'facebook_page_id')
 
 	def validate(self):
-		
-
 		if not self.route:
-			self.route = cstr('Properties')+'/'+cstr(self.property_status)+'/'+frappe.scrub(self.property_name).replace('_', '-')
+			# self.route = cstr('Properties')+'/'+cstr(self.property_status)+'/'+frappe.scrub(self.property_name).replace('_', '-')
+			self.route = frappe.scrub(self.property_name).replace('_', '-')
 
 	def get_context(self, context):
 		context.parents = [{'name': self.property_status }]

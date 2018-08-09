@@ -80,7 +80,6 @@ frappe.ui.form.on('Property', {
 			};
 			img.src = file_0_detail;
 			// getMeta(file_0_detail);
-			// file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
 			html = '<meta property="og:image"  content="' + file_0_detail + '"/>'
 			property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
 			console.log(property_url)
@@ -88,6 +87,16 @@ frappe.ui.form.on('Property', {
 			frm.set_value('base_url', frappe.urllib.get_base_url())
 			// frm.set_value('image_1_html', file_1_detail)
 			console.log(html)
+			if(cur_frm.get_files().length>1){
+			file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
+			var img = new Image();
+			img.onload = function(){
+				frm.set_value('image_1_width', this.width)
+				frm.set_value('image_1_height',  this.height)
+			};
+			img.src = file_0_detail;
+			frm.set_value('image_1_html', file_1_detail)
+			}
 			// $(html).appendTo($('body'))
 			cur_frm.refresh_field('image_0_html')
 				frm.add_custom_button("Post to FB",

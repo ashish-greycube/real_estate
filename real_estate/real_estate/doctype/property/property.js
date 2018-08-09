@@ -94,7 +94,7 @@ frappe.ui.form.on('Property', {
 				frm.set_value('image_1_width', this.width)
 				frm.set_value('image_1_height',  this.height)
 			};
-			img.src = file_0_detail;
+			img.src = file_1_detail;
 			frm.set_value('image_1_html', file_1_detail)
 			}
 			// $(html).appendTo($('body'))

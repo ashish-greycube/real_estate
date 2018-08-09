@@ -18,7 +18,7 @@
  "is_standard": 1, 
  "login_required": 0, 
  "max_attachment_size": 0, 
- "modified": "2018-08-09 08:32:55.331961", 
+ "modified": "2018-08-09 15:16:40.066114", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "property-lead", 
@@ -28,7 +28,7 @@
  "route": "property-lead", 
  "show_sidebar": 0, 
  "sidebar_items": [], 
- "success_message": "You will soon hear from us. thanks!", 
+ "success_message": "Je vous remercie. Nous vous contacterons bient\u00f4t.", 
  "success_url": "/property-lead", 
  "title": "Property Lead", 
  "web_form_fields": [

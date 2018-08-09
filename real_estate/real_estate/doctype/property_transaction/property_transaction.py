@@ -15,22 +15,22 @@ class PropertyTransaction(Document):
 		is_paid_by_client = self.is_paid_by_client
 		is_paid_by_owner = self.is_paid_by_owner
 		property = self.property
-		if transaction_type=='Rent' or transaction_type == 'Sale':
+		if transaction_type=='Louer' or transaction_type == 'Vente':
 			if (is_paid_by_client == 0 and is_paid_by_owner == 0) :
-				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Unpaid')
+				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Non Payé')
 			if (is_paid_by_client == 1 and is_paid_by_owner == 0) :
-				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Owner Unpaid')
+				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Propriétaire non payé')
 			if (is_paid_by_client == 0 and is_paid_by_owner == 1) :
-				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Client Unpaid')
+				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Client non payé')
 			if (is_paid_by_client == 1 and is_paid_by_owner == 1) :
-				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Paid')
+				frappe.db.set_value('Property Transaction', self.name, "transaction_status", 'Payé')
 
-			if (transaction_type == 'Rent') :
-				frappe.db.set_value('Property', property, "property_status", 'Rented')
-				frappe.db.set_value('Property Transaction', self.name, "property_status", 'Rented')
-			if (transaction_type == 'Sale') :
-				frappe.db.set_value('Property', property, "property_status", 'Sold')
-				frappe.db.set_value('Property Transaction', self.name, "property_status", 'Sold')
+			if (transaction_type == 'Louer') :
+				frappe.db.set_value('Property', property, "property_status", 'Loué')
+				frappe.db.set_value('Property Transaction', self.name, "property_status", 'Loué')
+			if (transaction_type == 'Vente') :
+				frappe.db.set_value('Property', property, "property_status", 'Vendu')
+				frappe.db.set_value('Property Transaction', self.name, "property_status", 'Vendu')
 		self.reload()
 
 def get_client(doctype, txt, searchfield, start, page_len, filters):

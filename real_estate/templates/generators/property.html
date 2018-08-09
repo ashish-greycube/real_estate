@@ -45,24 +45,11 @@
 </div>
 {% endblock %}
 {%- block head_include -%}
-
-
 		<meta property="fb:app_id" content="{{fb_app_id}}"/>
-		<meta property="fb:pages" content="[{{fb_page_id}}]"/>
-		<meta property="og:type" content="article"/>
-		
-		<meta property="og:see_also" content="{{ base_url }}/property-lead?for_property={{ doc.name }}"/>
-		<meta property="og:rich_attachment" content="true"/>
-
 		<meta property="og:title" content="{{ property_name}} of type {{ property_type }} ">
-		<meta property="og:description"        content="Highly Acclaimed Property Named {{property_name }}, located in city {{city }} is available for {{property_status}}.
-		If you are interested, kindly contact us for further details, .
-		We look forward to serve you the best properties for your needs." />
-
+		<meta property="og:url" content="{{base_url}}/{{ property_name}}">
+		<meta property="og:description"        content="Propriété hautement acclamée Nommée {{property_name}},située dans la ville {{city}} est disponible pour {{property_status}}. Si vous êtes intéressé, veuillez nous contacter pour plus de détails, {{company_name}} {{company_phone_no}} {{company_email}} {{company_website}}." />
 		<meta property="og:image"  content="{{image_0_html}}"/>
 		<meta property="og:image:width"           content="{{image_0_width}}">
 		<meta property="og:image:height"           content="{{image_0_height}}">
-		<meta property="og:image"  content="{{image_1_html}}"/>
-		<meta property="og:image:width"           content="{{image_1_width}}">
-		<meta property="og:image:height"           content="{{image_1_height}}">
 {% endblock %}

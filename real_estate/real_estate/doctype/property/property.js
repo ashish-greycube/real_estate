@@ -27,13 +27,15 @@ window.fbAsyncInit = function () {
 }(document, 'script', 'facebook-jssdk'));
 
 frappe.ui.form.on('Property', {
-	onload_post_render:function (frm) {
+	onload: function (frm) {
+		if (frm.doc.__islocal) {
+			frm.call({
+				method: 'get_fb_app_id',
+				doc: frm.doc
 
-		frm.call({
-			method: 'get_fb_app_id',
-			doc: frm.doc
-	
-		})
+			})
+		}
+
 
 	},
 
@@ -64,70 +66,67 @@ frappe.ui.form.on('Property', {
 			}
 		}
 	},
-	validate:function (frm) {
+	validate: function (frm) {
 
 	},
 	refresh: function (frm, cdt, cdn) {
 		frm.set_value('show_in_website', 1)
-		if(cur_frm.get_files().length!=0){
-			
+		if (cur_frm.doc.property_photo != undefined) {
+
 			// Use images that are at least 1200 x 630 pixels for the best display on high resolution devices. At the minimum, you should use images that are 600 x 315 pixels
-			file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
+			// file_0_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[0].file_url
+			file_0_detail = frappe.urllib.get_base_url() + cur_frm.doc.property_photo
 			var img = new Image();
-			img.onload = function(){
+			img.onload = function () {
 				frm.set_value('image_0_width', this.width)
-				frm.set_value('image_0_height',  this.height)
+				frm.set_value('image_0_height', this.height)
 			};
 			img.src = file_0_detail;
 			// getMeta(file_0_detail);
-			html = '<meta property="og:image"  content="' + file_0_detail + '"/>'
-			property_url=frappe.urllib.get_base_url() +'/'+frm.doc.route
-			console.log(property_url)
+			property_url = frappe.urllib.get_base_url() + '/' + frm.doc.route
 			frm.set_value('image_0_html', file_0_detail)
 			frm.set_value('base_url', frappe.urllib.get_base_url())
-			// frm.set_value('image_1_html', file_1_detail)
-			console.log(html)
-			if(cur_frm.get_files().length>1){
-			file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
-			var img = new Image();
-			img.onload = function(){
-				frm.set_value('image_1_width', this.width)
-				frm.set_value('image_1_height',  this.height)
-			};
-			img.src = file_1_detail;
-			frm.set_value('image_1_html', file_1_detail)
-			}
-			// $(html).appendTo($('body'))
-			cur_frm.refresh_field('image_0_html')
-				frm.add_custom_button("Post to FB",
+
+			// if (cur_frm.get_files().length > 1) {
+			// 	file_1_detail = frappe.urllib.get_base_url() + cur_frm.get_files()[1].file_url
+			// 	var img = new Image();
+			// 	img.onload = function () {
+			// 		frm.set_value('image_1_width', this.width)
+			// 		frm.set_value('image_1_height', this.height)
+			// 	};
+			// 	img.src = file_1_detail;
+			// 	frm.set_value('image_1_html', file_1_detail)
+			// }
+
+			frm.add_custom_button("Post to FB",
 				function () {
 					FB.ui({
 						method: 'share',
 						display: 'popup',
-						href:property_url
+						href: property_url
 					}, function (response) {});
-	
+
 				}
 			);
 		}
 
 
 	},
-	post_to_fb: function (frm) {
-		return (
-			frm.call({
-				method: 'publish_to_facebook',
-				doc: frm.doc,
-				freeze: true,
-				freeze_message: "Hello",
-				callback: (r) => {
+	// post_to_fb: function (frm) {
+	// 	return (
+	// 		frm.call({
+	// 			method: 'publish_to_facebook',
+	// 			doc: frm.doc,
+	// 			freeze: true,
+	// 			freeze_message: "Hello",
+	// 			callback: (r) => {
 
-					if (r.message) {
-						console.log(r.message)
-						frappe.msgprint(r.message.id);
-					}
-				}
-			})
-		);
-	}
+	// 				if (r.message) {
+	// 					console.log(r.message)
+	// 					frappe.msgprint(r.message.id);
+	// 				}
+	// 			}
+	// 		})
+	// 	);
+	// }
 });

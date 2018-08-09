@@ -21,8 +21,12 @@ class Property(WebsiteGenerator):
 	)
 
 	def get_fb_app_id(self):
-		self.fb_app_id=frappe.db.get_single_value('FaceBook Settings', 'fb_app_id')
-		self.fb_page_id=frappe.db.get_single_value('FaceBook Settings', 'facebook_page_id')
+		self.fb_app_id=frappe.db.get_single_value('Real Estate Settings', 'fb_app_id')
+		self.company_name=frappe.db.get_single_value('Real Estate Settings', 'company_name')
+		self.company_phone_no=frappe.db.get_single_value('Real Estate Settings', 'company_phone_no')
+		self.company_email=frappe.db.get_single_value('Real Estate Settings', 'company_email')
+		self.company_website=frappe.db.get_single_value('Real Estate Settings', 'company_website')
+
 
 	def validate(self):
 		if not self.route:
@@ -74,21 +78,6 @@ class Property(WebsiteGenerator):
 		return status
 ##multi
 
-
-
-		# photo_list=[]
-		# imgs_id = []
-		# for i in range(3):
-		# 	message="Property : "+self.property_name
-		# #  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
-		# 	photo = open(get_file_path(self.property_photo), 'rb')
-		# 	status=api.put_photo(photo,published='False',message=message,caption=self.property_name,link='https://google.com')
-		# 	print(status)
-		# 	photo_list.append(status['id'])
-		# 	print(i)
-		# 	print"--------------------------------------------------------------"
-		# print(photo_list)
-		# return status	
 
 
 def get_api(cfg):

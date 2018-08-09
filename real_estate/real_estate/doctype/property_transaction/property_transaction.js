@@ -3,26 +3,26 @@
 
 cur_frm.fields_dict['property'].get_query = function (doc, cdt, cdn) {
 	transaction_type = doc.transaction_type
-	if (transaction_type == 'Rent') {
+	if (transaction_type == 'Louer') {
 		return {
 			filters: {
-				property_status: ["in", ["For Rent", "For Rent And Sale"]],
+				property_status: ["in", ["A louer", "À louer et à vendre"]],
 				'docstatus': 0,
 				disable:0
 			}
 		}
-	} else if (transaction_type == 'Sale') {
+	} else if (transaction_type == 'Vente') {
 		return {
 			filters: {
-				property_status: ["in", ["For Sale", "For Rent And Sale"]],
+				property_status: ["in", ["À vendre", "À louer et à vendre"]],
 				'docstatus': 0,
 				disable:0
 			}
 		}
-	} else if (transaction_type == 'Visit') {
+	} else if (transaction_type == 'Visite') {
 		return {
 			filters: {
-				property_status: ["in", ["For Rent","For Sale", "For Rent And Sale"]],
+				property_status: ["in", ["A louer","À vendre", "À louer et à vendre"]],
 				'docstatus': 0,
 				disable:0
 			}
@@ -30,7 +30,7 @@ cur_frm.fields_dict['property'].get_query = function (doc, cdt, cdn) {
 	}else if (transaction_type == '') {
 		return {
 			filters: {
-				property_status: ["in", ["For Rent","For Sale", "For Rent And Sale"]],
+				property_status: ["in", ["A louer","À vendre", "À louer et à vendre"]],
 				'docstatus': 0,
 				disable:0
 			}
@@ -46,8 +46,8 @@ frappe.ui.form.on('Property Transaction', {
 		console.log(transaction_type)
 		transaction_type = frm.doc.transaction_type
 		property = frm.doc.property
-		if (transaction_type == 'Visit') {
-			frm.set_value('transaction_status', 'Visit Fee Received')
+		if (transaction_type == 'Visite') {
+			frm.set_value('transaction_status', 'Frais de visite reçus')
 			frm.refresh_field('transaction_status')
 		}
 
@@ -61,24 +61,24 @@ frappe.ui.form.on('Property Transaction', {
 		property = frm.doc.property
 		console.log(frm.doc.status)
 		console.log(transaction_type)
-		if (transaction_type == 'Rent' || transaction_type == 'Sale') {
+		if (transaction_type == 'Louer' || transaction_type == 'Vente') {
 			if (is_paid_by_client == 0 && is_paid_by_owner == 0) {
-				frm.set_value('transaction_status', 'Unpaid')
+				frm.set_value('transaction_status', 'Non Payé')
 			}
 			if (is_paid_by_client == 1 && is_paid_by_owner == 0) {
-				frm.set_value('transaction_status', 'Owner Unpaid')
+				frm.set_value('transaction_status', 'Propriétaire non payé')
 			}
 			if (is_paid_by_client == 0 && is_paid_by_owner == 1) {
-				frm.set_value('transaction_status', 'Client Unpaid')
+				frm.set_value('transaction_status', 'Client non payé')
 			}
 			if (is_paid_by_client == 1 && is_paid_by_owner == 1) {
-				frm.set_value('transaction_status', 'Paid')
+				frm.set_value('transaction_status', 'Payé')
 			}
-			if (transaction_type == 'Rent') {
-				set_property_status = "Rented"
+			if (transaction_type == 'Louer') {
+				set_property_status = "Loué"
 			}
-			if (transaction_type == 'Sale') {
-				set_property_status = "Sold"
+			if (transaction_type == 'Vente') {
+				set_property_status = "Vendu"
 			}
 			frappe.call({
 				"method": "frappe.client.set_value",
@@ -153,7 +153,7 @@ frappe.ui.form.on('Property Transaction', {
 		frm.set_value('property', '')
 		frm.set_value('property_name', '')
 		frm.set_value('property_status', '')
-		frm.set_value('transaction_status', 'None')
+		frm.set_value('transaction_status', 'Aucun')
 		$(cur_frm.fields_dict.property_details.wrapper).html('');
 		frm.set_value('rent_price', '')
 		frm.set_value('rent_duration', '')
@@ -170,7 +170,7 @@ frappe.ui.form.on('Property Transaction', {
 		frm.set_value('is_paid_by_client', '')
 		frm.set_value('client_payment_date', '')
 		
-		if (frm.doc.transaction_type == 'Visit') {
+		if (frm.doc.transaction_type == 'Visite') {
 			frappe.call({
 				method: "real_estate.real_estate.doctype.property_transaction.property_transaction.get_visit_price",
 				callback: function (r, rt) {
@@ -223,15 +223,15 @@ frappe.ui.form.on('Property Transaction', {
 		frm.set_indicator_formatter('transaction_status',
 			function (doc) {
 				let indicator = 'dark grey';
-				if (doc.transaction_status == 'Unpaid') {
+				if (doc.transaction_status == 'Non Payé') {
 					indicator = 'red';
-				} else if (doc.transaction_status == 'Client Unpaid') {
+				} else if (doc.transaction_status == 'Client non payé') {
 					indicator = 'orange';
-				} else if (doc.transaction_status == 'Owner Unpaid') {
+				} else if (doc.transaction_status == 'Propriétaire non payé') {
 					indicator = 'yellow';
-				} else if (doc.transaction_status == 'Paid') {
+				} else if (doc.transaction_status == 'Payé') {
 					indicator = 'blue';
-				}else if (doc.transaction_status == 'Visit Fee Received') {
+				}else if (doc.transaction_status == 'Frais de visite reçus') {
 					indicator = 'green';
 				}
 				return indicator;

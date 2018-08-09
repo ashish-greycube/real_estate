@@ -11,9 +11,9 @@ frappe.views.calendar["Property Transaction"] = {
 	},
     gantt: true,
 	get_css_class: function(data) {
-		if(data.transaction_status==="None") {
+		if(data.transaction_status==="Aucun") {
 			return "success";
-		} else if(data.transaction_status==="Paid") {
+		} else if(data.transaction_status==="Payé") {
 			return "warning";
 		} else {
 			return "danger";

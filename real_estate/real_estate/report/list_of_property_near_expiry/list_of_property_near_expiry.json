@@ -8,18 +8,21 @@
  "idx": 0, 
  "is_standard": "Yes", 
  "letter_head": "Immovy", 
- "modified": "2018-08-08 15:02:30.056758", 
+ "modified": "2018-08-08 16:12:09.988188", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "List Of Property Near Expiry", 
  "owner": "Administrator", 
- "query": "select \nP.property_name AS Property, \nP.property_type AS \"Property Type\",\nPT.rent_end_date AS \"Expires On\" ,\nPT.rent_start_date AS \"Rent Started On\" ,\nPT.rent_price AS \"Rent Price\",\nPT.rent_duration AS \"Rent Duration (Months)\",\nPT.customer AS \"Client\",\nPT.telephone AS \"Telephone\",\nPT.customer_email AS \"Email\",\nPT.commission_from_client AS \"Commission From Client:Currency\",\nPT.is_paid_by_client AS \"Paid by Client\",\nP.customer AS \"Property Owner\",\nP.telephone AS \"Owner Contact\",\nP.email  AS \"Owner Email\",\nPT.commission_from_owner AS \"Commission From Owner:Currency\",\nPT.is_paid_by_owner AS \"Paid by Owner\"\n\nfrom `tabProperty`AS P INNER JOIN\n`tabProperty Transaction` AS PT \nON PT.property = P.name \nwhere P.property_status = \"Rented\" \nand DATEDIFF (rent_end_date , CURDATE()) <= 60\nand PT.docstatus = 1;\n", 
+ "query": "select \nP.property_name AS \"Property:Text:150\", \nP.property_type AS \"Property Type:Text:100\",\nPT.rent_end_date AS \"Expires On:Date:100\" ,\nPT.rent_start_date AS \"Rent Started On:Date:120\" ,\nPT.rent_price AS \"Rent Price:Currency:120\",\nPT.rent_duration AS \"Rent Duration (Months):Int:180\",\nPT.customer AS \"Client:Text:100\",\nPT.telephone AS \"Telephone:Text:100\",\nPT.customer_email AS \"Email:Text:120\",\nPT.commission_from_client AS \"Commission From Client:Currency:170\",\nIF(PT.is_paid_by_client , 'Yes', 'No')AS \" Paid by Client:Text:100\",\nP.customer AS \"Property Owner:Text:120\",\nP.telephone AS \"Owner Contact:Text:120\",\nP.email  AS \"Owner Email:Text:100\",\nPT.commission_from_owner AS \"Commission From Owner:Currency:170\",\nIF(PT.is_paid_by_owner , 'Yes', 'No')AS \"Paid by Owner:Text:120\",\nPT.transaction_status AS \"Transaction Status:Text:130\"\nfrom `tabProperty`AS P INNER JOIN\n`tabProperty Transaction` AS PT \nON PT.property = P.name \nwhere P.property_status = \"Rented\" \nand DATEDIFF (rent_end_date , CURDATE()) <= 60\nand PT.docstatus = 1;\n", 
  "ref_doctype": "Property Transaction", 
  "report_name": "List Of Property Near Expiry", 
  "report_type": "Query Report", 
  "roles": [
   {
    "role": "System Manager"
+  }, 
+  {
+   "role": "Agency Owner"
   }
  ]
 }

@@ -27,7 +27,15 @@ window.fbAsyncInit = function () {
 }(document, 'script', 'facebook-jssdk'));
 
 frappe.ui.form.on('Property', {
+	onload_post_render:function (frm) {
 
+		frm.call({
+			method: 'get_fb_app_id',
+			doc: frm.doc
+	
+		})
+
+	},
 
 	customer: function (frm) {
 		frm.set_value('contact_email', "")
@@ -55,6 +63,9 @@ frappe.ui.form.on('Property', {
 				query: "real_estate.real_estate.doctype.property.property.get_owner"
 			}
 		}
+	},
+	validate:function (frm) {
+
 	},
 	refresh: function (frm, cdt, cdn) {
 		frm.set_value('show_in_website', 1)
@@ -93,21 +104,21 @@ frappe.ui.form.on('Property', {
 
 
 	},
-	// post_to_fb: function (frm) {
-	// 	return (
-	// 		frm.call({
-	// 			method: 'publish_to_facebook',
-	// 			doc: frm.doc,
-	// 			freeze: true,
-	// 			freeze_message: "Hello",
-	// 			callback: (r) => {
+	post_to_fb: function (frm) {
+		return (
+			frm.call({
+				method: 'publish_to_facebook',
+				doc: frm.doc,
+				freeze: true,
+				freeze_message: "Hello",
+				callback: (r) => {
 
-	// 				if (r.message) {
-	// 					console.log(r.message)
-	// 					frappe.msgprint(r.message.id);
-	// 				}
-	// 			}
-	// 		})
-	// 	);
-	// }
+					if (r.message) {
+						console.log(r.message)
+						frappe.msgprint(r.message.id);
+					}
+				}
+			})
+		);
+	}
 });

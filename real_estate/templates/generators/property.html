@@ -1,11 +1,24 @@
 {% extends "templates/web.html" %}
+{%- block head -%}
 
+{% block meta_block %}
+<meta property="fb:app_id" content="{{fb_app_id}}"/>
+<meta property="fb:pages" content="[{{fb_page_id}}]"/>
+<meta property="og:title" content="{{ property_name and property_type }} ">
+<meta property="og:url" content="{{ base_url }}/property-lead?for_property={{ doc.name }}">
+<meta property="og:description"        content="How long?" />
+<meta property="og:image"  content="{{image_0_html}}"/>
+<meta property="og:image:width"           content="{{image_0_width}}">
+<meta property="og:image:height"           content="{{image_0_height}}">
+{% endblock %}
+{% endblock %}
 {% block breadcrumbs %}
 	{% include "templates/includes/breadcrumbs.html" %}
 {% endblock %}
 
 {% block header %}
 <h1>{{ property_name }}</h1>
+
 {% endblock %}
 
 {% block page_content %}
@@ -20,14 +33,7 @@
 				{% else %}
 					{{ product_image(property_photo, "product-full-image") }}
 				
-					<meta property="fb:app_id" content="{{fb_app_id}}"/>
-					<meta property="fb:pages" content="[{{fb_page_id}}]"/>
-					<meta property="og:title" content="{{ property_name and property_type }} ">
-					<meta property="og:url" content="{{ base_url }}/property-lead?for_property={{ doc.name }}">
-					<meta property="og:description"        content="How long?" />
-					<meta property="og:image"  content="{{image_0_html}}"/>
-					<meta property="og:image:width"           content="{{image_0_width}}">
-					<meta property="og:image:height"           content="{{image_0_height}}">
+
 				
 				{% endif %}
 			</div>

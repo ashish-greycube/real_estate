@@ -31,11 +31,15 @@ frappe.ui.form.on('Property', {
 		if (frm.doc.__islocal) {
 			frm.call({
 				method: 'get_fb_app_id',
-				doc: frm.doc
+				doc: frm.doc,
+				callback: (r) => {
+					frm.refresh_field('fb_app_id')
+
+					console.log(cur_frm.doc.fb_app_id)
+				}
 
 			})
 		}
-
 
 	},
 

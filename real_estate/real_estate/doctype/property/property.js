@@ -104,6 +104,13 @@ frappe.ui.form.on('Property', {
 
 			frm.add_custom_button("Post to FB",
 				function () {
+					FB.init({
+						// appId: '506334379802931',
+						appId: cur_frm.doc.fb_app_id,
+						autoLogAppEvents: true,
+						xfbml: true,
+						version: 'v3.1'
+					});
 					FB.ui({
 						method: 'share',
 						display: 'popup',

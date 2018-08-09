@@ -28,7 +28,7 @@ window.fbAsyncInit = function () {
 
 frappe.ui.form.on('Property', {
 	onload: function (frm) {
-		if (frm.doc.__islocal) {
+		// if (frm.doc.__islocal) {
 			frm.call({
 				method: 'get_fb_app_id',
 				doc: frm.doc,
@@ -39,7 +39,7 @@ frappe.ui.form.on('Property', {
 				}
 
 			})
-		}
+		// }
 
 	},
 

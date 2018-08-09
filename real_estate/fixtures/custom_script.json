@@ -3,9 +3,18 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Customer", 
-  "modified": "2018-08-07 06:16:01.187703", 
+  "modified": "2018-08-09 11:12:55.704799", 
   "name": "Customer-Client", 
-  "script": "frappe.ui.form.on(\"Customer\", \"onload_post_render\", function (frm) {\n    if (frm.doc.customer_type == 'Client' || frm.doc.customer_type == 'Owner') {\n        frm.clear_custom_buttons()\n        frm.dashboard.hide()\n    }\n});", 
+  "script": "frappe.ui.form.on(\"Customer\", \"onload_post_render\", function (frm) {\n    if (frm.doc.customer_type == 'Client' || frm.doc.customer_type == 'Owner') {\n        frm.clear_custom_buttons()\n        frm.dashboard.hide()\n    }\n\n});\n\nfrappe.ui.form.on(\"Customer\", \"onload\", function (frm) {\n    if (frappe.get_prev_route()[1] == \"Lead\") {\n        frm.set_value('customer_type', 'Client')\n    }\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Lead", 
+  "modified": "2018-08-09 11:20:14.220363", 
+  "name": "Lead-Client", 
+  "script": "frappe.ui.form.on(\"Lead\", \"onload_post_render\", function (frm) {\n  \n      \n        frm.dashboard.hide()\n    \n\n});", 
   "script_type": "Client"
  }
 ]

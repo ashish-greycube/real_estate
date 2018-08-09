@@ -7,21 +7,32 @@ cur_frm.fields_dict['property'].get_query = function (doc, cdt, cdn) {
 		return {
 			filters: {
 				property_status: ["in", ["For Rent", "For Rent And Sale"]],
-				'docstatus': 0
+				'docstatus': 0,
+				disable:0
 			}
 		}
 	} else if (transaction_type == 'Sale') {
 		return {
 			filters: {
 				property_status: ["in", ["For Sale", "For Rent And Sale"]],
-				'docstatus': 0
+				'docstatus': 0,
+				disable:0
 			}
 		}
 	} else if (transaction_type == 'Visit') {
 		return {
 			filters: {
 				property_status: ["in", ["For Rent","For Sale", "For Rent And Sale"]],
-				'docstatus': 0
+				'docstatus': 0,
+				disable:0
+			}
+		}
+	}else if (transaction_type == '') {
+		return {
+			filters: {
+				property_status: ["in", ["For Rent","For Sale", "For Rent And Sale"]],
+				'docstatus': 0,
+				disable:0
 			}
 		}
 	}

@@ -124,7 +124,7 @@ fixtures = [
     	{
 		"dt":"Custom Script",
 		"filters":[
-			["name", "in", ["Customer-Client"]],
+			["name", "in", ["Customer-Client","Lead-Client"]],
 		]
 	},
 	    	{

@@ -7,9 +7,10 @@ frappe.views.calendar["Property Transaction"] = {
 		"end": "transaction_date",
 		"id": "name",
         "title": "transaction_type",
-        "status":"transaction_status",
+		"status":"transaction_status",
+		"allDay": "allDay",
 	},
-    gantt: true,
+    gantt: false,
 	get_css_class: function(data) {
 		if(data.transaction_status==="Aucun") {
 			return "success";
@@ -20,12 +21,12 @@ frappe.views.calendar["Property Transaction"] = {
 		}
 	},
 	filters: [
-		{
-			"fieldtype": "Link",
-			"fieldname": "property",
-			"options": "property",
-			"label": __("Property")
-		}
+		// {
+		// 	"fieldtype": "Link",
+		// 	"fieldname": "property",
+		// 	"options": "property",
+		// 	"label": __("Property")
+		// }
 	],
 	get_events_method: "frappe.desk.calendar.get_events"
 }

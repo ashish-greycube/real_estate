@@ -198,11 +198,13 @@ frappe.ui.form.on('Property Transaction', {
 
 	},
 	rent_price: function (frm) {
+		if (frm.doc.transaction_type=='Louer'){
 		frm.set_value('commission_from_owner', frm.doc.rent_price)
 		frm.set_value('commission_from_client', frm.doc.rent_price)
+		}
 	},
 	sale_price: function (frm) {
-		if (frm.doc.sale_price > 0) {
+		if (frm.doc.sale_price > 0 && frm.doc.transaction_type=='Vente') {
 			frm.set_value('commission_from_owner', frm.doc.sale_price * 0.01)
 			frm.set_value('commission_from_client', frm.doc.sale_price * 0.01)
 		}

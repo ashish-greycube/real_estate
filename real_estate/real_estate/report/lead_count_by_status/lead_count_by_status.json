@@ -1,0 +1,37 @@
+{
+ "add_total_row": 1, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-08-13 10:31:20.567522", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "letter_head": "Immovy", 
+ "modified": "2018-08-13 11:16:13.147469", 
+ "modified_by": "Administrator", 
+ "module": "Real Estate", 
+ "name": "Lead Count by Status", 
+ "owner": "Administrator", 
+ "query": "SELECT\ncount(*) as \"Open Lead Count:Int:120\"\nFROM\n\t`tabLead`\nWHERE `tabLead`.status = \"Open\"\n\tand `tabLead`.docstatus < 2;\n", 
+ "ref_doctype": "Lead", 
+ "report_name": "Lead Count by Status", 
+ "report_type": "Query Report", 
+ "roles": [
+  {
+   "role": "Sales User"
+  }, 
+  {
+   "role": "Sales Manager"
+  }, 
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "Agency Staff"
+  }, 
+  {
+   "role": "Agency Owner"
+  }
+ ]
+}

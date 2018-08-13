@@ -4,7 +4,7 @@
 
 from __future__ import unicode_literals
 import frappe
-import facebook
+# import facebook
 from frappe.model.document import Document
 from frappe.website.website_generator import WebsiteGenerator
 from frappe import _
@@ -36,68 +36,68 @@ class Property(WebsiteGenerator):
 	def get_context(self, context):
 		context.parents = [{'name': self.property_status }]
 
-	def publish_to_facebook(self):
-			# Fill in the values noted in previous steps here
-		cfg = {
-			"page_id"      : "313618416046043",
-			# "page_id"      : "641303646232151",  # Step 1
-			# "access_token" : "EAAC6Oqelg08BADK0ZAuaXv7Mn6ZBcA9emP4uSmCEQqFrlzGQjsehvTkrCXyJq2ZCvAFcee0V0osn2GGg7m8oFh31FrqdYdW2dBgafgPvFtZBWe4DYhBrQJBty6ZC1GWWu2kq8fYKjw8TD7ThAOGD8ZAzCgRDzZCdSgMOFe8uBmedB9t656GIbZBP"
-			 "access_token" : "EAAHMgijYgTMBAAXYJXMQ3biYuo4txWjAKZChWRqZCKBuXFxuaArnod0oVsxjrnMxonyqqkZCjPAJ2ZB89Fuxx8aZBBNy19pxYcrPRSpP9RQuI0LSxoldg3ECl9hprffA78FoooDTRcv4i0ZCJ2GCpl8enuz5QizUGE3PztHTQzXEwOukMZA6V1T"
-			}
+# 	def publish_to_facebook(self):
+# 			# Fill in the values noted in previous steps here
+# 		cfg = {
+# 			"page_id"      : "313618416046043",
+# 			# "page_id"      : "641303646232151",  # Step 1
+# 			# "access_token" : "EAAC6Oqelg08BADK0ZAuaXv7Mn6ZBcA9emP4uSmCEQqFrlzGQjsehvTkrCXyJq2ZCvAFcee0V0osn2GGg7m8oFh31FrqdYdW2dBgafgPvFtZBWe4DYhBrQJBty6ZC1GWWu2kq8fYKjw8TD7ThAOGD8ZAzCgRDzZCdSgMOFe8uBmedB9t656GIbZBP"
+# 			 "access_token" : "EAAHMgijYgTMBAAXYJXMQ3biYuo4txWjAKZChWRqZCKBuXFxuaArnod0oVsxjrnMxonyqqkZCjPAJ2ZB89Fuxx8aZBBNy19pxYcrPRSpP9RQuI0LSxoldg3ECl9hprffA78FoooDTRcv4i0ZCJ2GCpl8enuz5QizUGE3PztHTQzXEwOukMZA6V1T"
+# 			}
 
-		api = get_api(cfg)
+# 		api = get_api(cfg)
 
-##multi
-		print"--------------------------------------------------------------"
-		imgs_id = []
-		# retrieve property photo
-		if self.property_photo:
-			photo = open(get_file_path(self.property_photo), 'rb')
-			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
-			photo.close()
-		# retrieve property slide show photos
-		for img in self.get("slideshow_items"):
-			photo = open(get_file_path(img.image), 'rb')
-			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
-			photo.close()
-		print(imgs_id)
-		args=dict()
+# ##multi
+# 		print"--------------------------------------------------------------"
+# 		imgs_id = []
+# 		# retrieve property photo
+# 		if self.property_photo:
+# 			photo = open(get_file_path(self.property_photo), 'rb')
+# 			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
+# 			photo.close()
+# 		# retrieve property slide show photos
+# 		for img in self.get("slideshow_items"):
+# 			photo = open(get_file_path(img.image), 'rb')
+# 			imgs_id.append(api.put_photo(photo, album_id='me/photos',published=False)['id'])
+# 			photo.close()
+# 		print(imgs_id)
+# 		args=dict()
 
-		message="Property : "+self.property_name
-		# #  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
+# 		message="Property : "+self.property_name
+# 		# #  "		Description:"+self.property_type+"		Location : "+self.address+"		Contact :"+ self.telephone+"		Rent per month is: "+self.rent_price
 	
-		if imgs_id:
-			args["message"]=message
-			for img_id in imgs_id:
-				key="attached_media["+str(imgs_id.index(img_id))+"]"
-				args[key]="{'media_fbid': '"+img_id+"'}"
-			print(args)
-			status=api.request(path='/me/feed', args=None, post_args=args, method='POST')
-		print"--------------------------------------------------------------"
-		print status
-		return status
-##multi
+# 		if imgs_id:
+# 			args["message"]=message
+# 			for img_id in imgs_id:
+# 				key="attached_media["+str(imgs_id.index(img_id))+"]"
+# 				args[key]="{'media_fbid': '"+img_id+"'}"
+# 			print(args)
+# 			status=api.request(path='/me/feed', args=None, post_args=args, method='POST')
+# 		print"--------------------------------------------------------------"
+# 		print status
+# 		return status
+# ##multi
 
 
 
-def get_api(cfg):
-  graph = facebook.GraphAPI(cfg['access_token'])
-  # Get page token to post as the page. You can skip 
-  # the following if you want to post as yourself. 
-  resp = graph.get_object('me/accounts')
-  page_access_token = None
-  for page in resp['data']:
-    if page['id'] == cfg['page_id']:
-      page_access_token = page['access_token']
-  graph = facebook.GraphAPI(page_access_token)
-  # graph.put_photo(image=open("/home/ashish/frappe-bench-master/apps/post_to_fb/post_to_fb/www/greycubelogo1200a5c2fd.png", 'rb'),album_path='641303646232151' + "/picture")
-  return graph
-  # You can also skip the above if you get a page token:
-  # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
-  # and make that long-lived token as in Step 3
+# def get_api(cfg):
+#   graph = facebook.GraphAPI(cfg['access_token'])
+#   # Get page token to post as the page. You can skip 
+#   # the following if you want to post as yourself. 
+#   resp = graph.get_object('me/accounts')
+#   page_access_token = None
+#   for page in resp['data']:
+#     if page['id'] == cfg['page_id']:
+#       page_access_token = page['access_token']
+#   graph = facebook.GraphAPI(page_access_token)
+#   # graph.put_photo(image=open("/home/ashish/frappe-bench-master/apps/post_to_fb/post_to_fb/www/greycubelogo1200a5c2fd.png", 'rb'),album_path='641303646232151' + "/picture")
+#   return graph
+#   # You can also skip the above if you get a page token:
+#   # http://stackoverflow.com/questions/8231877/facebook-access-token-for-pages
+#   # and make that long-lived token as in Step 3
 
-if __name__ == "__main__":
-  main()
+# if __name__ == "__main__":
+#   main()
 
 def get_list_context(context):
 	context.title = _("Property")

@@ -1,0 +1,177 @@
+Data Import Template,,,,
+Table:,Translation,,,
+,,,,
+,,,,
+Notes:,,,,
+Please do not change the template headings.,,,,
+First data column must be blank.,,,,
+"If you are uploading new records, leave the ""name"" (ID) column blank.",,,,
+"If you are uploading new records, ""Naming Series"" becomes mandatory, if present.",,,,
+Only mandatory fields are necessary for new records. You can delete non-mandatory columns if you wish.,,,,
+"For updating, you can update only selective columns.",,,,
+You can only upload upto 5000 records in one go. (may be less in some cases),,,,
+,,,,
+DocType:,Translation,,,
+Column Labels:,ID,Language,Source Text,Translated Text
+Column Name:,name,language,source_name,target_name
+Mandatory:,Yes,No,No,No
+Type:,Data (text),Link,Code,Code
+Info:,,Valid Language,,
+Start entering data below this line,,,,
+,,fr,Leads,Prospects
+,,fr,Settings,Paramètres
+,,fr,Owners,anything
+,,fr,Additional information regardig the customer,Informations complémentaires concernant le client
+,,fr,More Information,Plus d'information
+,,fr,Type,Type
+,,fr,Disabled,désactivé
+,,fr,Gender,Genre
+,,fr,Full Name,Nom complet
+,,fr,Name and Type,Nom et type
+,,fr,New Customer,Nouveau client
+,,fr,Visit Fee Received,Frais de visite reçus
+,,fr,Permanently Submit,Soumettre Définitif
+,,fr,Confirm,Confirmer
+,,fr,Submit,Soumettre
+,,fr,Total Amount,Montant total
+,,fr,Client Payment Date,Date de paiement du client
+,,fr,Owner Payment Date,Date de paiement du propriétaire
+,,fr,Is Paid By Client,Est payé par le client
+,,fr,Is Paid By Owner,Est payé par le propriétaire
+,,fr,Commission From Client,Commission du client
+,,fr,Commission From Owner,Commission du propriétaire
+,,fr,Agency Commission,Commission d'agence
+,,fr,Rent Start Date,Date de début du loyer
+,,fr,Rent Duration (Months),Durée du loyer (mois)
+,,fr,Rent Details,Détails de la location
+,,fr,Negotiable,Négociable
+,,fr,Property Description,Description de la propriété
+,,fr,Advert Seen on,Annonce Vu sur
+,,fr,Birth Place,Lieu de naissance
+,,fr,Transaction Status,Statut de la transaction
+,,fr,Birth Date,Date de naissance
+,,fr,Transaction Date,Date de la transaction
+,,fr,Customer Email,Email client
+,,fr,National ID,Carte d'identité nationale
+,,fr,Transaction Type,Type de Transaction
+,,fr,New Property Transaction,Nouvelle transaction de propriété
+,,fr,Refresh,Rafraîchir
+,,fr,New,Nouveau
+,,fr,Make a new Property Transaction,Nouvelle transaction de propriété
+,,fr,Property Transaction,Transaction de propriété
+,,fr,You created this a day ago,Vous l'avez créé il y a un jour
+,,fr,You edited this a day ago,Vous avez édité ceci il y a un jour
+,,fr,Shared With,Partagé avec
+,,fr,Attachments,Pièces jointes
+,,fr,Assigned To,Assigné à
+,,fr,Assign,Attribuer
+,,fr,Remove,Retirer
+,,fr,Change ,Changement
+,,fr,New Email,nouveau courriel
+,,fr,Comment,Commentaire
+,,fr,Add a comment,Ajouter un commentaire
+,,fr,Save,sauvegarder
+,,fr,Post to FB,Publier sur FB
+,,fr,Notes,Remarques
+,,fr,Attach,Attacher
+,,fr,Property Document,Document de propriété
+,,fr,Location Map,Une carte
+,,fr,Property Photo,Photo de la propriété
+,,fr,Market,Marché
+,,fr,Shops,Magasins
+,,fr,Rail Station,Gare
+,,fr,Bus,Autobus
+,,fr,Metro/Tram,Métro / Tram
+,,fr,Town Centre,Centre-ville
+,,fr,Secondary School,École secondaire
+,,fr,Primary School,École primaire
+,,fr,District,District
+,,fr,Sector,Secteur
+,,fr,Environment,Environnement
+,,fr,Chimney,Cheminée
+,,fr,Radiator,Radiateur
+,,fr,Floor Ceiling,Plafond de plancher
+,,fr,Fuel Oil,Essence
+,,fr,Collective,Collectif
+,,fr,Individual,Individuel
+,,fr,Type of Heating,Type de chauffage
+,,fr,Tile,Tuile
+,,fr,Storage,Espace de rangement
+,,fr,Refrigerator,Réfrigérateur
+,,fr,Over/Range,Sur toute la gamme
+,,fr,Playground,Cour de récréation
+,,fr,Warderobe,Warderobe
+,,fr,Gas,Gaz
+,,fr,Electricity,Électricité
+,,fr,Water,Eau
+,,fr,Phone Cable,Câble téléphonique
+,,fr,Antenna TV,Antenne TV
+,,fr,Closets,Placards
+,,fr,Dryer,Séchoir
+,,fr,Empty Garbage,Des ordures
+,,fr,Dishwasher,Vaisselle
+,,fr,Double glazing,Double vitrage
+,,fr,Microwave,Four micro onde
+,,fr,Internet,l'Internet
+,,fr,On Ground Exterior,Extérieur au sol
+,,fr,Cellar,Cave
+,,fr,Parking,Parking
+,,fr,Garage,Garage
+,,fr,Balcony,Balcon
+,,fr,Terrace,Terrasse
+,,fr,Armoured Door,Porte blindée
+,,fr,Alarm,Alarme
+,,fr,Digicode,Digicode
+,,fr,Intercom,Interphone
+,,fr,Property Features,Caractéristiques de l'établissement
+,,fr,Yes / No,Oui / Non
+,,fr,Furnished,Meublé
+,,fr,Orientation,Orientation
+,,fr,Gaurdian,Gaurdian
+,,fr,Total Floors,Etage Total
+,,fr,Year built,Année de construction
+,,fr,Building Detail,Détail du construction
+,,fr,Deposit,Dépôt
+,,fr,Disable,Désactiver
+,,fr,Baths,Thermes
+,,fr,Space (Sq mt),Espace (m²)
+,,fr,Rooms,Pièces
+,,fr,FNR,FNR
+,,fr,Rent Price (Monthly),Prix de location (mois)
+,,fr,Property type,Type de propriété
+,,fr,Property Detail,Détail de la propriété
+,,fr,Country,Pays
+,,fr,City,Ville
+,,fr,Postal Code,code postal
+,,fr,Address,Adresse
+,,fr,Floor,Sol
+,,fr,Property Coordinates,Coordonnées de la propriété
+,,fr,Email,Email
+,,fr,Telephone,Téléphone
+,,fr,Refresh ,Rafraîchir
+,,fr,Last Modified On,Dernière modification le
+,,fr,Property Owner,Propriétaire
+,,fr,Property Name,Nom de la propriété
+,,fr,Add Filter,Ajouter un filtre
+,,fr,Show Tags,Voir les étiquettes
+,,fr,No Tags,No Tags
+,,fr,Tags,Mots clés
+,,fr,Assigned to Me,Assigné à moi
+,,fr,Kanban,Kanban
+,,fr,Images,Images
+,,fr,List,liste
+,,fr,Reports,Rapports
+,,fr,Client,Client
+,,fr,Transaction,Transaction
+,,fr,Property,Propriété
+,,fr,Sold,Vendu
+,,fr,Rented,Loué
+,,fr,Fore Sale,À vendre
+,,fr,For Rent ,A louer
+,,fr,Property Status,Statut de la propriété
+,,fr,List of Properties Near Expiry,Propriétés proche de la date d'expiration
+,,fr,No Transaction today,Aucune transaction aujourd'hui
+,,fr,Today's Transactions,Transactions du jour
+,,fr,Unpaid Owner,Propriétaire non payé
+,,fr,Unpaid Client,Client non payé
+,,fr,Dashboard,Tableau de bord

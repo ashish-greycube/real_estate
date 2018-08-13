@@ -56,6 +56,7 @@ website_generators = ["Property"]
 
 # before_install = "real_estate.install.before_install"
 # after_install = "real_estate.install.after_install"
+after_install = "real_estate.api.import_french_translation"
 
 # Desk Notifications
 # ------------------

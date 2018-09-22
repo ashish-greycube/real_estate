@@ -8,18 +8,36 @@
  "idx": 0, 
  "is_standard": "Yes", 
  "letter_head": "Standard", 
- "modified": "2018-08-02 14:30:27.689504", 
+ "modified": "2018-09-21 12:10:24.116412", 
  "modified_by": "Administrator", 
  "module": "Real Estate", 
  "name": "Statewise Property Count", 
  "owner": "Administrator", 
- "query": "select P.property_name AS Property , PT.rent_end_date AS \"Expires On\"\nfrom `tabProperty`AS P INNER JOIN\n`tabProperty Transaction` AS PT \nON PT.property = P.name \nwhere P.property_status = \"Rented\" \nand DATEDIFF (rent_end_date , CURDATE()) <= 60\nand PT.docstatus = 1;\n", 
+ "query": "select P.property_name AS Property , PT.rent_end_date AS \"Expires On\"\nfrom `tabProperty`AS P INNER JOIN\n`tabProperty Transaction` AS PT \nON PT.property = P.name \nwhere P.property_status = \"Rented\" \nand DATEDIFF (rent_end_date , CURDATE()) <= 90\nand PT.docstatus = 1;\n", 
  "ref_doctype": "Property Transaction", 
  "report_name": "Statewise Property Count", 
  "report_type": "Query Report", 
  "roles": [
   {
    "role": "System Manager"
+  }, 
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "Accounts Manager"
+  }, 
+  {
+   "role": "Accounts Manager"
+  }, 
+  {
+   "role": "Accounts Manager"
   }, 
   {
    "role": "Accounts Manager"

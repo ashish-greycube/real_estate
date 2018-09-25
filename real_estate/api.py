@@ -7,6 +7,21 @@ from frappe.utils import (cint, split_emails, get_request_site_address, cstr,get
 from frappe import _
 
 
+@frappe.whitelist(allow_guest=True)
+def generate_lead(name,email,phone,for_property,note=None):
+	print '============================================================================'
+	print email
+	print '============================================================================'
+	d = frappe.new_doc('Lead')
+	d.lead_name = name
+	d.email_id = email
+	d.phone = phone
+	d.remark = note
+	d.for_property = for_property
+	d.insert(ignore_permissions=True)
+	return d.name
+
+
 @frappe.whitelist()
 def import_french_translation():
 	frappe.db.sql('delete from `tabTranslation`')

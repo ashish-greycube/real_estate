@@ -3,7 +3,7 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Customer", 
-  "modified": "2018-08-10 08:05:25.372782", 
+  "modified": "2018-09-25 15:00:10.530598", 
   "name": "Customer-Client", 
   "script": "frappe.ui.form.on(\"Customer\", {\n    onload: function (frm) {\n        if (frappe.get_prev_route()[1] == \"Lead\") {\n            frm.set_value('customer_type', 'Client')\n        }\n    },\n    onload_post_render: function (frm) {\n\t\n        frm.clear_custom_buttons()\n        frm.dashboard.hide()\n    },\n    refresh: function (frm) {\n        frm.clear_custom_buttons()\n        frm.dashboard.hide()\n    },\n});", 
   "script_type": "Client"

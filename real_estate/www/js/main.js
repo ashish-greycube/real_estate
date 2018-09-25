@@ -265,16 +265,6 @@ var tunaWizard = {
                 return;
             }
 
-            if (!$("input[name='agreement']").prop("checked")) {
-                swal({
-                    title: "Warning!",
-                    text: __("You must agree with the terms and conditions."),
-                    type: "warning",
-                    confirmButtonText: "Ok"
-                });
-                return;
-            }
-
             swal({
                 title: null,
                 text: "<img class='tuna_loading' src='images/loading.svg'/> Saving...",

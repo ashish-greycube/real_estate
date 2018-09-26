@@ -72,7 +72,7 @@ frappe.ui.form.on('Property', {
 	},
 
 	validate: function (frm) {
-		frm.set_value('signup_form_url',frappe.urllib.get_base_url()+'/property-lead?for_property='+encodeURIComponent(cur_frm.doc.property_name))
+		frm.set_value('signup_form_url',frappe.urllib.get_base_url()+'/property-lead?for_property='+cur_frm.doc.name)
 
 	},
 	refresh: function (frm, cdt, cdn) {

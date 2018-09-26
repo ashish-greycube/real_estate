@@ -25,15 +25,7 @@ var tunaWizard = {
             tunaContainer.add(tunaLeft).add(tunaRight).css("height", "auto");
         }
 
-        //Testimonail Slider Show/Hide
-        var sliderContainer = $(".tuna-slider-container");
-        if (windowHeight < 600 || windowWidth < 768) {
-            sliderContainer.hide();
-        } else {
-            sliderContainer.show();
-            //Reload slider because of hidden
-            self.slider.reloadSlider();
-        }
+
         if (windowHeight < 400) {
             $(".button-container").css("bottom", "50px");
         }
@@ -65,14 +57,15 @@ var tunaWizard = {
                 return;
             }
         }
-        if (nextStep === 4) {
 
-        }
-        if (nextStep === 5) {
+        if (nextStep === 4) {
             if ($("#tn_phone").val().trim() === "" || $("#tn_phone").val().trim().length < 13) {
                 self.setInputError($("#tn_phone"));
                 return;
             }
+        }
+        if (nextStep === 5) {
+
         }
 
         //Change Step
@@ -95,7 +88,7 @@ var tunaWizard = {
         var stepCountsEl = $(".steps-count");
         if (nextStep === self.stepCount) {
             console.log('inside transfer')
-            stepCountsEl.html("CONFIRM DETAILS");
+            stepCountsEl.html("Confirmer");
             $(".button-container").hide();
             var stepConfirm = $(".step-confirm");
             stepConfirm.find("input[name='name']").val($("#tn_name").val());
@@ -132,7 +125,7 @@ var tunaWizard = {
      */
     isEmail: function(value) {
         value = value.toLowerCase();
-        var reg = new RegExp(/^[a-z]{1}[\d\w\.-]+@[\d\w-]{3,}\.[\w]{2,3}(\.\w{2})?$/);
+        var reg = new RegExp(/^[a-z]{1}[\d\w\.-]+@[\d\w-]{1,}\.[\w]{2,3}(\.\w{2})?$/);
         return reg.test(value);
     },
     /**
@@ -256,14 +249,16 @@ var tunaWizard = {
                 return;
             }
 
-            var remarkInput = $(this).find("input[name='remark']");
-
-
             var phoneInput = $(this).find("input[name='phone']");
             if (phoneInput.val().trim() === "" || phoneInput.val().trim().length < 13) {
                 phoneInput.addClass("confirm-input-error").focus();
                 return;
             }
+            
+            var remarkInput = $(this).find("input[name='remark']");
+
+
+
 
             swal({
                 title: null,
@@ -289,8 +284,8 @@ var tunaWizard = {
                         data = r.message
                         if (data.slice(0,4)=='LEAD') {
                             swal({
-                                title: "Success",
-                                text: "Your information submitted successfully!",
+                                title: "Merci",
+                                text: "Vos informations ont été soumises avec succès!",
                                 type: "success",
                                 confirmButtonText: "Ok"
                             });

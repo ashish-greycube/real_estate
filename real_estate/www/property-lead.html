@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Signup Form</title>
+    <title>Information et visite de bien</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -39,28 +39,13 @@
     <div class='container'>
         <div class="row">
             <div class='tuna-signup-left col-md-4 col-sm-4'>
-                <img class='tuna-signup-logo' src='images/tuna-logo-white.png' alt="logo"/>
+                
 
-                <p>Inquiry for</p>
+                <p>Information et visite de bien</p>
                 <p class="tuna-trial" id="for_property"></p>
                 
                 <hr/>
-                <div class="tuna-slider-container">
-                    <ul class="tuna-slider">
-                        <li class='tuna-signup-testimonial'>
-                            <i class="icon icon-quill"></i>
-                            <p>We are using Tuna Signup Form, our customers love it and it's amazing :)</p>
-                            <img src='images/testimonials/logo1.png' alt=""/>
-                            <b>Sume Tella<span>‒ Digital Marketing Specialist</span></b>
-                        </li>
-                        <li class='tuna-signup-testimonial'>
-                            <i class="icon icon-quill"></i>
-                            <p>We are using Tuna Signup Form, our customers love it and it's amazing :)</p>
-                            <img src='images/testimonials/logo1.png' alt=""/>
-                            <b>John Masculer<span>‒ Customer Service Department</span></b>
-                        </li>
-                    </ul>
-                </div>
+                <img class='tuna-signup-logo' src='/files/agency-logo-singup.png' alt="logo"/>
             </div>
             <div class='tuna-signup-right col-md-8 col-sm-8 '>
 
@@ -70,36 +55,36 @@
 
                 <div class="tuna-steps">
                     <div class="step step-active" data-step-id='1'>
-                        <label class="formLabel" for="tn_name">{{ _("What is your name?") }}</label>
+                        <label class="formLabel" for="tn_name">Quel est votre nom et prénom?</label>
                         <input type="text" class="formInput" id='tn_name' name="tn_name" autocomplete="off" spellcheck="false" />
-                        <div class='help-error'><i class="icon icon-warning"></i> Name field is required!</div>
+                        <div class='help-error'><i class="icon icon-warning"></i> nom est requis!</div>
                     </div> 
                     <div class="step" data-step-id='2'>
-                        <label class="formLabel" for="tn_email">What is your email?</label>
+                        <label class="formLabel" for="tn_email">Votre Adresse e-mail?</label>
                         <input type="email" class="formInput" id='tn_email' name="tn_email" autocomplete="off" spellcheck="false" />
-                        <div class='help-error'><i class="icon icon-warning"></i> You have entered an invalid e-mail address. Please try again!</div>
+                        <div class='help-error'><i class="icon icon-warning"></i> Vous avez entré une adresse électronique non valide. Veuillez réessayer!</div>
                         <div class="help-info">Ex. name@company.com</div>
                     </div> 
  
                     <div class="step" data-step-id='3'>
-                        <label class="formLabel" for="tn_phone">What is your phone number?</label>
+                        <label class="formLabel" for="tn_phone">Quel est ton numéro de telephone?</label>
                         <input type="tel" class="formInput" id='tn_phone' name="tn_phone" autocomplete="off" spellcheck="false" />
-                        <div class='help-error'><i class="icon icon-warning"></i>Please enter a valid 10 digit US phone number without country code</div>
+                        <div class='help-error'><i class="icon icon-warning"></i>Veuillez entrer un numéro de téléphone valide à 10 chiffres sans code pays</div>
                         <div class="help-info">Ex. 500 123 45 67 </div>
                     </div>
                     <div class="step" data-step-id='4'>
-                        <label class="formLabel" for="tn_remark">Note</label>
+                        <label class="formLabel" for="tn_remark">Commentair</label>
                         <input type="text" class="formInput" id='tn_remark' name="tn_remark" autocomplete="off" spellcheck="true" />
                         <div class="help-info">Optional</div>
                     </div>
                     <div class="step step-confirm " data-step-id='5'>
                         <form action='post' name='signupForm' autocomplete="off" class="form-horizontal">
                             <div class="form-group">
-                                <div class="control-label col-md-4">Name</div>
+                                <div class="control-label col-md-4">Prénom</div>
                                 <div class="col-md-8">
                                     <div class="input-container">
                                         <input type="text" name="name" autocomplete="off" spellcheck="false" class="form-control" />
-                                        <a href="javascript:void(0)" class="editInput">EDIT</a>
+                                        <a href="javascript:void(0)" class="editInput">MODIFIER</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,32 +93,32 @@
                                 <div class="col-md-8">
                                     <div class="input-container">
                                         <input type="text" name="email" autocomplete="off" spellcheck="false" class="form-control" />
-                                        <a href="javascript:void(0)" class="editInput">EDIT</a>
+                                        <a href="javascript:void(0)" class="editInput">MODIFIER</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="control-label col-md-4">Phone</div>
+                                <div class="control-label col-md-4">Téléphone</div>
                                 <div class="col-md-8">
                                     <div class="input-container">
                                         <input type="text" name="phone" autocomplete="off" spellcheck="false" class="form-control" />
-                                        <a href="javascript:void(0)" class="editInput">EDIT</a>
+                                        <a href="javascript:void(0)" class="editInput">MODIFIER</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="control-label col-md-4">Remark</div>
+                                <div class="control-label col-md-4">Commentair</div>
                                 <div class="col-md-8">
                                     <div class="input-container">
                                         <input type="text" name="remark" autocomplete="off" spellcheck="false" class="form-control" />
-                                        <a href="javascript:void(0)" class="editInput">EDIT</a>
+                                        <a href="javascript:void(0)" class="editInput">MODIFIER</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="step-confirm-buttons">
                                 <div>
-                                    <a href="javascript:void(0)" class="btn btn-white btn-rounded finishBtn">Ready, Let's Start!</a>
-                                    <span>or press "Enter"</span>
+                                    <a href="javascript:void(0)" class="btn btn-white btn-rounded finishBtn">Prêt, confirmer!</a>
+                                    <span>ou appuyez sur "Enter"</span>
                                 </div>
                             </div>
                         </form>
@@ -141,10 +126,10 @@
                 </div>
                 <div class='button-container'>
                     <div>
-                        <a href="javascript:void(0)" class="btn btn-white btn-rounded nextStep" tabindex="0">Next Step →</a>
-                        <span>or press "Enter"</span>
+                        <a href="javascript:void(0)" class="btn btn-white btn-rounded nextStep" tabindex="0">Suivant →</a>
+                        <span>ou appuyez sur "Enter"</span>
                     </div>
-                    <a href="javascript:void(0)" class='btn btn-white-transparent btn-rounded prevStep' tabindex="1">← Previous</a>
+                    <a href="javascript:void(0)" class='btn btn-white-transparent btn-rounded prevStep' tabindex="1">← Précédent</a>
                 </div>
             </div>
         </div>

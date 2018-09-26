@@ -88,7 +88,7 @@ frappe.ui.form.on("Lead", {
         }).then(function (r) {
             if (r.message) {
                 frappe.confirm(
-                    "Results matching <b>" + r.message.length + "</b> properties"+"<br /> Would you like to go to list?",
+                    "Résultats correspondant à <b>" + r.message.length + "</b> propriétés"+"<br /> Voulez-vous aller à la liste?",
                     function () {
                            console.log(filter)
                         frappe.route_options = filter
@@ -99,7 +99,7 @@ frappe.ui.form.on("Lead", {
                     }
                 )
             }else{
-                show_alert('No property found matching this criteria', 4);
+                show_alert('Aucune propriété trouvée correspondant à ce critère', 4);
             }
         });
     }

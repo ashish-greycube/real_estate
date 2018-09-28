@@ -19,5 +19,6 @@ frappe.listview_settings['Property Transaction'] = {
 		this.wrapper.find("a.remove-filter").on("click", function() {
 			me.remove();
 		});
+		cur_list.refresh();
 }
 };

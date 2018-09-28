@@ -127,7 +127,7 @@ frappe.ui.form.on('Property Transaction', {
 			});
 		}
 	},
-	refresh: function (frm) {
+	onload_post_render: function (frm) {
 		var so = frm.get_docfield("customer");
 		so.get_route_options_for_new_doc = function (field) {
 			return {

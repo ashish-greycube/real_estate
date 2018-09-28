@@ -7,7 +7,6 @@ frappe.listview_settings['Property'] = {
 		listview.page.add_menu_item(__("Clear Filter"), function() {
 			frappe.route_options = {'property_name':["like",'%%']}
             frappe.set_route("List", "Property");
-			cur_list.refresh();
 		});
 
 	}

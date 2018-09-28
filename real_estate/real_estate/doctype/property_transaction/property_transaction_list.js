@@ -16,12 +16,10 @@ frappe.listview_settings['Property Transaction'] = {
 	},
 	onload: function(listview) {
 
-		// this.wrapper.find("a.remove-filter").on("click", function() {
-		// 	me.remove();
-		// });
+		this.wrapper.find("a.remove-filter").on("click", function() {
+			me.remove();
+		});
 
-		listview.page.clear_menu()
-		frappe.route_options = {'transaction_type':["like",'%%']}
-		frappe.set_route("List", "Property Transaction");
+
 }
 };

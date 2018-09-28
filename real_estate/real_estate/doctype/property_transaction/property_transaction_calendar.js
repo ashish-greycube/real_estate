@@ -18,12 +18,6 @@ frappe.views.calendar["Property Transaction"] = {
 		} else {
 			return "danger";
 		}
-	},
-	
-	onload: function(listview) {
-			// this.remove();
-			this.clear_filters();
-			// frappe.route_options = {"customer": ["!=", "2"]}
-			console.log('ii')
 	}
+
 }

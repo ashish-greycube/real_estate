@@ -13,5 +13,11 @@ frappe.listview_settings['Property Transaction'] = {
 	},
 	refresh: function(listview) {
 		listview.page.clear_menu()
-	}
+	},
+	onload: function(listview) {
+
+		this.wrapper.find("a.remove-filter").on("click", function() {
+			me.remove();
+		});
+}
 };

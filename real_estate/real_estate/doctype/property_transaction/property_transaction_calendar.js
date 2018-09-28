@@ -10,7 +10,6 @@ frappe.views.calendar["Property Transaction"] = {
 		"status":"transaction_status",
 		"allDay": "allDay",
 	},
-    gantt: false,
 	get_css_class: function(data) {
 		if(data.transaction_status==="Aucun") {
 			return "success";
@@ -20,13 +19,11 @@ frappe.views.calendar["Property Transaction"] = {
 			return "danger";
 		}
 	},
-	filters: [
-		// {
-		// 	"fieldtype": "Link",
-		// 	"fieldname": "property",
-		// 	"options": "property",
-		// 	"label": __("Property")
-		// }
-	],
-	get_events_method: "frappe.desk.calendar.get_events"
+	
+	onload: function(listview) {
+			// this.remove();
+			this.clear_filters();
+			// frappe.route_options = {"customer": ["!=", "2"]}
+			console.log('ii')
+	}
 }

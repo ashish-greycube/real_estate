@@ -139,8 +139,26 @@ frappe.ui.form.on('Property Transaction', {
 	rent_duration: function (frm) {
 		if (frm.doc.rent_duration != "") {
 			frm.set_value("rent_end_date", frappe.datetime.add_months(frm.doc.rent_start_date, frm.doc.rent_duration));
-			frm.set_value("total_amount", frm.doc.rent_price * frm.doc.rent_duration);
+			frm.set_value("total_rent_amount", frm.doc.rent_price * frm.doc.rent_duration);
+			frm.set_value("total_amount", frm.doc.total_rent_amount+frm.doc.deposit+frm.doc.notary_fees);
 		}
+	},
+	deposit: function (frm) {
+		if (transaction_type == 'Louer') {
+
+		frm.set_value("total_amount", frm.doc.total_rent_amount+frm.doc.deposit+frm.doc.notary_fees);	
+		}
+	},
+	notary_fees: function (frm) {
+		if (transaction_type == 'Louer') {
+		frm.set_value("total_amount", frm.doc.total_rent_amount+frm.doc.deposit+frm.doc.notary_fees);	
+		}
+	},
+	already_paid_amount: function (frm) {
+		frm.set_value("outstanding_amount", frm.doc.total_amount-frm.doc.already_paid_amount);	
+	},
+	total_amount: function (frm) {
+		frm.set_value("outstanding_amount", frm.doc.total_amount-frm.doc.already_paid_amount);	
 	},
 	rent_start_date: function (frm) {
 		if (frm.doc.rent_start_date != "") {
@@ -156,12 +174,17 @@ frappe.ui.form.on('Property Transaction', {
 		frm.set_value('transaction_status', 'Aucun')
 		$(cur_frm.fields_dict.property_details.wrapper).html('');
 		frm.set_value('rent_price', '')
+		frm.set_value('notary_fees', '')
+		frm.set_value('deposit', '')
+		frm.set_value('total_rent_amount', '')
 		frm.set_value('rent_duration', '')
 		frm.set_value('rent_start_date',frappe.datetime.get_today() )
 		frm.set_value('rent_end_date', '')
 		frm.set_value('sale_price', '')
 		frm.set_value('negotiable', '')
 		frm.set_value('total_amount', '')
+		frm.set_value('already_paid_amount', '')
+		frm.set_value('outstanding_amount', '')
 		frm.set_value('notes', '')
 		frm.set_value('commission_from_owner', '')
 		frm.set_value('is_paid_by_owner', '')
@@ -201,6 +224,7 @@ frappe.ui.form.on('Property Transaction', {
 		if (frm.doc.transaction_type=='Louer'){
 		frm.set_value('commission_from_owner', frm.doc.rent_price)
 		frm.set_value('commission_from_client', frm.doc.rent_price)
+		frm.set_value('deposit', frm.doc.rent_price)
 		}
 	},
 	sale_price: function (frm) {

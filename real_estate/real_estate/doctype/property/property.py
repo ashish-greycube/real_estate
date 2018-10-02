@@ -3,12 +3,13 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import frappe
+import frappe,erpnext
 # import facebook
 from frappe.model.document import Document
 from frappe.website.website_generator import WebsiteGenerator
 from frappe import _
 from frappe.utils import (cstr)
+from frappe.model.naming import make_autoname
 from frappe.utils.file_manager import save_file, get_file,get_file_path
 
 class Property(WebsiteGenerator):
@@ -19,6 +20,11 @@ class Property(WebsiteGenerator):
 		allow_guest_to_view=1,
 		no_cache = 1
 	)
+
+	def autoname(self):
+	# concat agency abbr
+		abbr = frappe.db.get_value('Company', erpnext.get_default_company(), 'abbr')
+		self.name = make_autoname("PR"+ "-" + abbr + "-.###")
 
 	def get_fb_app_id(self):
 		self.fb_app_id=frappe.db.get_single_value('Real Estate Settings', 'fb_app_id')
@@ -31,7 +37,7 @@ class Property(WebsiteGenerator):
 	def validate(self):
 		if not self.route:
 			# self.route = cstr('Properties')+'/'+cstr(self.property_status)+'/'+frappe.scrub(self.property_name).replace('_', '-')
-			self.route = frappe.scrub(self.property_name).replace('_', '-')
+			self.route = frappe.scrub(self.name).replace('_', '-')
 
 	def get_context(self, context):
 		context.parents = [{'name': self.property_status }]

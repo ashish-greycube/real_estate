@@ -27,13 +27,7 @@ window.fbAsyncInit = function () {
 }(document, 'script', 'facebook-jssdk'));
 
 frappe.ui.form.on('Property', {
-	setup: function (frm) {
-		frm.set_value('company_abbr',frappe.get_abbr(frappe.defaults.get_default("Company")))
-		console.log(frappe.get_abbr(frappe.defaults.get_default("Company")))
-	},
 	onload: function (frm) {
-		frm.set_value('company_abbr',frappe.get_abbr(frappe.defaults.get_default("Company")))
-		console.log(frappe.get_abbr(frappe.defaults.get_default("Company")))
 		// if (frm.doc.__islocal) {
 			frm.call({
 				method: 'get_fb_app_id',

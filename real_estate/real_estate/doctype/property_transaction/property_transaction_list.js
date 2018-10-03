@@ -15,10 +15,8 @@ frappe.listview_settings['Property Transaction'] = {
 		listview.page.clear_menu()
 	},
 	onload: function(listview) {
-		listview	
-		// this.wrapper.find("a.remove-filter").on("click", function() {
-		// 	me.remove();
-		// });
+
+		listview.wrapper.find("a.remove-filter").click()
 
 
 }

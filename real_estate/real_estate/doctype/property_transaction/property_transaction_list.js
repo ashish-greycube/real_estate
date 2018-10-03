@@ -15,12 +15,10 @@ frappe.listview_settings['Property Transaction'] = {
 		listview.page.clear_menu()
 	},
 	onload: function(listview) {
-		console.log('inside')
+		cur_list.wrapper.find("a.remove-filter").click()
 		if (frappe.get_route_str()=="List/Property Transaction/Calendar/Default") {
 			console.log('1inside')
-		this.wrapper.find("a.remove-filter").on("click", function() {
-			me.remove();
-		});
+			cur_list.wrapper.find("a.remove-filter").click()
 	}
 
 }

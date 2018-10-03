@@ -15,9 +15,10 @@ frappe.listview_settings['Property Transaction'] = {
 		listview.page.clear_menu()
 	},
 	onload: function(listview) {
-		listview.wrapper.find("a.remove-filter").click()
-		listview.wrapper.find("a.remove-filter").click()
-
+		if (listview.current_view=="Calendar") {
+			 cur_list.wrapper.find("a.remove-filter").click()
+			console.log('in')
+		}
 
 }
 };

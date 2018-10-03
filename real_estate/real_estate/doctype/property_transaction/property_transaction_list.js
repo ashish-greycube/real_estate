@@ -16,8 +16,9 @@ frappe.listview_settings['Property Transaction'] = {
 	},
 	onload: function(listview) {
 		if (frappe.get_prev_route()==["home-page"]) {
-			listview.wrapper.find("a.remove-filter").click()
-			listview.wrapper.find("a.remove-filter").click()
+			console.log('inside')
+			cur_list.wrapper.find("a.remove-filter").click()
+			cur_list.wrapper.find("a.remove-filter").click()
 			
 		}
 

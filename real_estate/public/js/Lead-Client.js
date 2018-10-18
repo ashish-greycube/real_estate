@@ -2,6 +2,9 @@ frappe.ui.form.on("Lead", {
     onload_post_render: function (frm) {
         frm.dashboard.hide()
     },
+    refresh: function (frm) {
+        frm.dashboard.hide()
+    },
     search: function (frm) {
         var filter = {}
 

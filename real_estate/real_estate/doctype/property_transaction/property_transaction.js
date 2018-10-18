@@ -43,7 +43,7 @@ frappe.ui.form.on('Property Transaction', {
 	before_submit: function (frm) {
 		console.log("inside submit")
 		console.log(frm.doc.status)
-		console.log(transaction_type)
+		console.log(frm.transaction_type)
 		transaction_type = frm.doc.transaction_type
 		property = frm.doc.property
 		if (transaction_type == 'Visite') {

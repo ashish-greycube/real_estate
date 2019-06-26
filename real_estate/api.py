@@ -9,9 +9,6 @@ from frappe import _
 
 @frappe.whitelist(allow_guest=True)
 def generate_lead(name,email,phone,for_property,note=None):
-	print '============================================================================'
-	print email
-	print '============================================================================'
 	d = frappe.new_doc('Lead')
 	d.lead_name = name
 	d.email_id = email
